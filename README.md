@@ -1,15 +1,6 @@
 
 # ANTLR v4.5.1 Swift Target
 
-#### Usage
-Download: [antlr4-4.5.1.jar](https://) and uncompress
-
-Example: generate lexer/parser/visitor from Hello.g file
-
-```bash
-java -cp antlr4-4.5.1.jar  org.antlr.v4.Tool -Dlanguage=Swift -visitor -o gen Hello.g4
-```
-
 #### Manually build
 Requires:
 
@@ -98,4 +89,26 @@ You should see antlr4-4.5.1.jar:
 
 ```
 [uncompress folder]/tool/target/antlr4-4.5.1.jar
+```
+
+5.use example  
+generate lexer/parser/visitor from Hello.g file
+
+```bash
+java -cp antlr4-4.5.1.jar  org.antlr.v4.Tool -Dlanguage=Swift -visitor -o gen Hello.g4
+```
+
+in｀gen｀ folder：
+
+``` 
+Hello.tokens
+HelloBaseListener.swift
+HelloBaseVisitor.swift
+HelloLexer.swift
+HelloLexer.tokens
+HelloLexerATN.json
+HelloListener.swift
+HelloParser.swift
+HelloParserATN.json
+HelloVisitor.swift 
 ```
