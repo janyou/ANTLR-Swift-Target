@@ -32,14 +32,15 @@ public class SwiftTarget extends Target {
     private static final ThreadLocal<STGroup> targetTemplates = new ThreadLocal<STGroup>();
 
     protected static final String[] swiftKeywords = {
-            "class", "deinit", "enum", "extension", "func", "import", "init", "internal", "let", "operator", "private",
-            "protocol", "public", "static", "struct", "subscript", "typealias", "var",
-            "break", "case", "continue", "default", "do", "else", "fallthrough", "for", "if", "in", "return",
-            "switch", "where", "while","as", "dynamicType", "false", "is", "nil", "self", "Self", "super", "true",
-            "__COLUMN__", "__FILE__", "__FUNCTION__", "__LINE__",
-            "associativity", "convenience", "dynamic", "didSet", "fina", "get", "infix", "inout", "lazy", "left",
-            "mutating", "none", "nonmutating", "optional", "override", "postfix", "precedence", "prefix",
-            "Protocol", "required", "right", "set", "Type", "unowned", "weak", "willSet"
+            "class", "deinit", "enum", "extension", "func", "import", "init", "inout", "internal",
+            "let", "operator", "private", "protocol", "public", "static", "struct", "subscript", "typealias", "var",
+            "break", "case", "continue", "default", "defer", "do", "else", "fallthrough", "for", "guard", "if",
+            "in", "repeat", "return", "switch", "where", "while",
+            "as", "catch", "dynamicType", "false", "is", "nil", "rethrows", "super", "self", "Self", "throw", "throws",
+            "true", "try", "__COLUMN__", "__FILE__", "__FUNCTION__","__LINE__",
+            "associativity", "convenience", "dynamic", "didSet", "final", "get", "infix", "indirect", "lazy",
+            "left", "mutating", "none", "nonmutating", "optional", "override", "postfix", "precedence",
+            "prefix", "Protocol", "required", "right", "set", "Type", "unowned", "weak", "willSet"
     };
 
     /** Avoid grammar symbols in this set to prevent conflicts in gen'd code. */
