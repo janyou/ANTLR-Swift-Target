@@ -25,5 +25,5 @@ HelloParserATN.json
 HelloVisitor.swift 
 ```
 
-#### [Manually build]()
-#### [Run Runtime Testsuite]()
+#### [Manually build](https://github.com/janyou/ANTLR-Swift-Target/blob/master/ManuallyBuild.md)
+#### [Run Runtime Testsuite](https://github.com/janyou/ANTLR-Swift-Target/blob/master/RuntimeTestsuite.md)
