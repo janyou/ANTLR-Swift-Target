@@ -148,12 +148,12 @@ public abstract class BaseTest {
 		//add antlr.swift
 		final ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		//TODO
-//		final URL swiftRuntime = loader.getResource("Swift/Antlr4");
-//		if ( swiftRuntime==null ) {
-//			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
-//		}
-//		String swiftRuntimePath = swiftRuntime.getPath();
-		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
+		final URL swiftRuntime = loader.getResource("Swift/Antlr4");
+		if ( swiftRuntime==null ) {
+			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
+		}
+		String swiftRuntimePath = swiftRuntime.getPath();
+		//String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
 		makeantlrFrameworkSrc(swiftRuntimePath,tmpdir);
 	}
 	private  void makeantlrFrameworkSrc(String frameworkDir,String buildDir) {
@@ -411,8 +411,7 @@ public abstract class BaseTest {
 
 	public boolean compile() {
 		try {
-//			if(!createProject())
-//				return false;
+
 			if(!buildProject())
 				return false;
 			return true;
@@ -421,44 +420,7 @@ public abstract class BaseTest {
 		}
 	}
 
-//	private File getTestProjectFile() {
-//		return new File(tmpdir, "Antlr4.Test.mono.csproj");
-//	}
-//private static boolean build(List<String> swiftFileList, String buildDir,String execName) throws Exception {
-//	String fileList =  swiftFileList.toString().replace("[", "").replace("]", "")
-//			.replace(", ", " ");
-//	long start  = System.currentTimeMillis();
-//	String argsString = "xcrun -sdk macosx swiftc " + fileList +  " -o "+execName;
-//	String[] args = argsString.split(" ");
-//	//xcrun -sdk macosx swiftc
-////        String[] args = {
-////                "xcrun",
-////                "-sdk",
-////                "macosx",
-////                "swiftc",
-////                swiftFileList.toString().replace("[", "").replace("]", "")
-////                        .replace(", ", " "),
-////                "-o "+execName
-////        };
-//
-//	//String cmd = args[0] + " " + args[1] + " "+ args[2];
-//
-//	Process process = Runtime.getRuntime().exec(args, null, new File(buildDir));
-//	StreamVacuum stdoutVacuum = new StreamVacuum(process.getInputStream());
-//	StreamVacuum stderrVacuum = new StreamVacuum(process.getErrorStream());
-//	stdoutVacuum.start();
-//	stderrVacuum.start();
-//	process.waitFor();
-//	stdoutVacuum.join();
-//	stderrVacuum.join();
-//	if ( stderrVacuum.toString().length()>0 ) {
-//
-//		System.err.println("buildProject stderrVacuum: "+ stderrVacuum);
-//	}
-//	long end  = System.currentTimeMillis();
-//	System.out.println("buildProject lost: "+ (end -  start));
-//	return process.exitValue()==0;
-//}
+
 	//remove import Antlr4
     private void removeImport()  throws Exception  {
 		for (String file : sourceFiles){
@@ -494,95 +456,6 @@ public abstract class BaseTest {
 		}
 		return process.exitValue()==0;
 	}
-
-//	private String locateMSBuild() {
-//		if(isWindows())
-//			return "\"C:\\Program Files (x86)\\MSBuild\\12.0\\Bin\\MSBuild.exe\"";
-//		else
-//			return locateTool("xbuild");
-//	}
-
-//	private boolean isWindows() {
-//		return System.getProperty("os.name").toLowerCase().contains("windows");
-//	}
-
-//	private String locateExec() {
-//		return new File(tmpdir, "bin/Release/Test.exe").getAbsolutePath();
-//	}
-
-//	private String locateTool(String tool) {
-//		String[] roots = { "/usr/bin/", "/usr/local/bin/" };
-//		for(String root : roots) {
-//			if(new File(root + tool).exists())
-//				return root + tool;
-//		}
-//		throw new RuntimeException("Could not locate " + tool);
-//	}
-//
-//	public boolean createProject() {
-//		try {
-//			String pack = BaseTest.class.getPackage().getName().replace(".", "/") + "/";
-//			// save auxiliary files
-//			saveResourceAsFile(pack + "AssemblyInfo.cs", new File(tmpdir, "AssemblyInfo.cs"));
-//			saveResourceAsFile(pack + "App.config", new File(tmpdir, "App.config"));
-//			// update project
-//			String projectName = isWindows() ? "Antlr4.Test.vs2013.csproj" : "Antlr4.Test.mono.csproj";
-//			final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-//			InputStream input = loader.getResourceAsStream(pack + projectName);
-//			Document prjXml = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
-//			// update runtime project reference
-//			// find project file as a resource not relative pathname (now that we've merged repos)
-//			String runtimeName = isWindows() ? "Antlr4.Runtime.vs2013.csproj" : "Antlr4.Runtime.mono.csproj";
-//			final URL runtimeProj = loader.getResource("Swift/runtime/Swift/Antlr4.Runtime/"+runtimeName);
-//			if ( runtimeProj==null ) {
-//				throw new RuntimeException("C# runtime project file not found at:" + runtimeProj.getPath());
-//			}
-//			String runtimeProjPath = runtimeProj.getPath();
-//			XPathExpression exp = XPathFactory.newInstance().newXPath()
-//					.compile("/Project/ItemGroup/ProjectReference[@Include='" + runtimeName + "']");
-//			Element node = (Element)exp.evaluate(prjXml, XPathConstants.NODE);
-//			node.setAttribute("Include", runtimeProjPath.replace("/", "\\"));
-//			// update project file list
-//			exp = XPathFactory.newInstance().newXPath().compile("/Project/ItemGroup[Compile/@Include='AssemblyInfo.cs']");
-//			Element group = (Element)exp.evaluate(prjXml, XPathConstants.NODE);
-//			if(group==null)
-//				return false;
-//			// remove existing children
-//			while(group.hasChildNodes())
-//				group.removeChild(group.getFirstChild());
-//			// add AssemblyInfo.cs, not a generated source
-//			sourceFiles.add("AssemblyInfo.cs");
-//			// add files to compile
-//			for(String file : sourceFiles) {
-//				Element elem = group.getOwnerDocument().createElement("Compile");
-//				elem.setAttribute("Include", file);
-//				group.appendChild(elem);
-//			}
-//			// save project
-//			File prjFile = getTestProjectFile();
-//			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-//			transformer.transform(new DOMSource(prjXml), new StreamResult(prjFile));
-//			return true;
-//		} catch(Exception e) {
-//			e.printStackTrace(System.err);
-//			return false;
-//		}
-//	}
-
-//	private void saveResourceAsFile(String resourceName, File file) throws IOException {
-//		InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
-//		if ( input==null ) {
-//			System.err.println("Can't find " + resourceName + " as resource");
-//			throw new IOException("Missing resource:" + resourceName);
-//		}
-//		OutputStream output = new FileOutputStream(file.getAbsolutePath());
-//		while(input.available()>0) {
-//			output.write(input.read());
-//		}
-//		output.close();
-//		input.close();
-//	}
 
 	public String execTest() {
 		try {
