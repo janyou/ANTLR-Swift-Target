@@ -27,7 +27,7 @@ import java.util.*;
 public class SwiftTarget extends Target {
 
     /**
-     * The Java target can cache the code generation templates.
+     * The Swift target can cache the code generation templates.
      */
     private static final ThreadLocal<STGroup> targetTemplates = new ThreadLocal<STGroup>();
 

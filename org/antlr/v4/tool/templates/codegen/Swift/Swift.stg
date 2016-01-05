@@ -37,7 +37,15 @@ SwiftTypeInitMap ::= [
 	"Bool":"false",
 	default:"nil" // anything other than a primitive type is an object
 ]
-
+SwiftTypeMap ::= [
+	"int":"Int",
+	"float":"Float",
+	"long":"Int64",
+	"double":"Double",
+	"bool":"Bool",
+	"boolean":"Bool",
+	default : key
+]
 // args must be <object-model-object>, <fields-resulting-in-STs>
 
 ParserFile(file, parser, namedActions) ::= <<
@@ -153,7 +161,7 @@ VisitorFile(file, header) ::= <<
 <!package <file.genPackage>;!>
 <endif>
 <header>
-import Antlr4;
+import Antlr4
 
 /**
  * This interface defines a complete generic visitor for a parse tree produced
@@ -230,11 +238,11 @@ public class <parser.name>: <superClass; null="Parser"> {
            }
            return decisionToDFA
      }()
-	internal let _sharedContextCache: PredictionContextCache = PredictionContextCache()
+	internal static let _sharedContextCache: PredictionContextCache = PredictionContextCache()
 	<if(parser.tokens)>
-	public let <parser.tokens:{k | <k>=<parser.tokens.(k)>}; separator=", ", wrap, anchor>
+	public static let <parser.tokens:{k | <k>=<parser.tokens.(k)>}; separator=", ", wrap, anchor>
 	<endif>
-	public let <parser.rules:{r | RULE_<r.name> = <r.index>}; separator=", ", wrap, anchor>
+	public static let <parser.rules:{r | RULE_<r.name> = <r.index>}; separator=", ", wrap, anchor>
 	public static let ruleNames: [String] = [
 		<parser.ruleNames:{r | "<r>"}; separator=", ", wrap, anchor>
 	]
@@ -262,8 +270,8 @@ public class <parser.name>: <superClass; null="Parser"> {
 	public func sempred(_localctx: RuleContext?, _ ruleIndex: Int,  _ predIndex: Int)throws -> Bool {
 		switch (ruleIndex) {
 		<parser.sempredFuncs.values:{f|
-case <f.ruleIndex>:
-	return try <f.name>_sempred((_localctx as! <f.ctxType>?), predIndex)}; separator="\n">
+case  <f.ruleIndex>:
+	return try <f.name>_sempred(_localctx?.castdown(<f.ctxType>), predIndex)}; separator="\n">
 	    default: return true
 		}
 		<!return true;!>
@@ -323,8 +331,9 @@ public func action(_localctx: RuleContext?,  _ ruleIndex: Int, _ actionIndex: In
 	switch (ruleIndex) {
 	<recog.actionFuncs.values:{f|
 case <f.ruleIndex>:
-	<f.name>_action((_localctx as! <f.ctxType>?), actionIndex);
-	break;}; separator="\n">
+	<f.name>_action((_localctx as <f.ctxType>?), actionIndex)
+	 }; separator="\n">
+	default: break
 	}
 }
 <actionFuncs.values; separator="\n">
@@ -335,7 +344,7 @@ public func sempred(_localctx: RuleContext?, _  ruleIndex: Int,_   predIndex: In
 	switch (ruleIndex) {
 	<recog.sempredFuncs.values:{f|
 case <f.ruleIndex>:
-	return try <f.name>_sempred((_localctx as <f.ctxType>?), predIndex)}; separator="\n">
+	return try <f.name>_sempred(_localctx?.castdown(<f.ctxType>), predIndex)}; separator="\n">
 	default: 	return true
 	}
 	<!return true;!>
@@ -352,7 +361,7 @@ public override func getVocabulary() -> Vocabulary {
 public override  init(_ input:TokenStream)throws {
     RuntimeMetaData.checkVersion("4.5.1", RuntimeMetaData.VERSION)
 	try super.init(input)
-	_interp = ParserATNSimulator(self,<p.name>._ATN,<p.name>._decisionToDFA,_sharedContextCache)
+	_interp = ParserATNSimulator(self,<p.name>._ATN,<p.name>._decisionToDFA, <parser.name>._sharedContextCache)
 }
 >>
 
@@ -365,7 +374,8 @@ private func <r.name>_action(_localctx: <r.ctxType>?,  _ actionIndex: Int) {
 	<actions:{index|
 case <index>:
 	<actions.(index)>
-	break;}; separator="\n">
+	 }; separator="\n">
+	 default: break
 	}
 }
 >>
@@ -374,7 +384,7 @@ case <index>:
  * overriding implementation impossible to maintain.
  */
 RuleSempredFunction(r, actions) ::= <<
-private func <r.name>_sempred(_localctx: <r.ctxType>?,  _ predIndex: Int) throws -> Bool {
+private func <r.name>_sempred(_localctx: <r.ctxType>!,  _ predIndex: Int) throws -> Bool {
 	switch (predIndex) {
 	<actions:{index|
     case <index>:return <actions.(index)>}; separator="\n">
@@ -390,8 +400,8 @@ RuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,namedActions,fina
 <altLabelCtxs:{l | <altLabelCtxs.(l)>}; separator="\n">
 
 <if(currentRule.modifiers)><currentRule.modifiers:{f | <f> }><else>public func <endif><currentRule.name>(<args; separator=",">) throws -> <currentRule.ctxType> {
-	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, getState()<currentRule.args:{a | , <a.name>}>,self)
-	try enterRule(_localctx, <currentRule.startState>,  RULE_<currentRule.name>)
+	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, getState()<currentRule.args:{a | , <a.name>}>, self)
+	try enterRule(_localctx, <currentRule.startState>,  <parser.name>.RULE_<currentRule.name>)
 	<namedActions.init>
 	<locals; separator="\n">
 	do {
@@ -430,13 +440,13 @@ LeftRecursiveRuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,
 	return try <currentRule.name>(0<currentRule.args:{a | , <a.name>}>)
 }
 
-private func <currentRule.name>(  _p<args:{a | , <a>}> :Int) throws -> <currentRule.ctxType>   {
+private func <currentRule.name>(_p<args:{a | , <a>}> :Int) throws -> <currentRule.ctxType>   {
 	let _parentctx: ParserRuleContext? = _ctx
 	var _parentState: Int = getState()
-	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, _parentState<currentRule.args:{a | , <a.name>}>)
+	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, _parentState<currentRule.args:{a | , <a.name>}>, self)
 	var  _prevctx: <currentRule.ctxType> = _localctx
 	var _startState: Int = <currentRule.startState>
-	try enterRecursionRule(_localctx, <currentRule.startState>, RULE_<currentRule.name>, _p)
+	try enterRecursionRule(_localctx, <currentRule.startState>, <parser.name>.RULE_<currentRule.name>, _p)
 	<namedActions.init>
 	<locals; separator="\n">
 	do {
@@ -477,7 +487,7 @@ CodeBlockForAlt(currentAltCodeBlock, locals, preamble, ops) ::= <<
 LL1AltBlock(choice, preamble, alts, error) ::= <<
 setState(<choice.stateNumber>)
 <!try _errHandler.sync(self);!>
-<if(choice.label)><labelref(choice.label)> = try _input.LT(1);<endif>
+<if(choice.label)><labelref(choice.label)> = try _input.LT(1)<endif>
 <preamble; separator="\n">
 switch (try _input.LA(1)) {
 <choice.altLook,alts:{look,alt | <cases(ttypes=look)>
@@ -540,7 +550,7 @@ repeat {
 AltBlock(choice, preamble, alts, error) ::= <<
 setState(<choice.stateNumber>)
 <!try _errHandler.sync(self);!>
-<if(choice.label)><labelref(choice.label)> = try _input.LT(1);<endif>
+<if(choice.label)><labelref(choice.label)> = try _input.LT(1)<endif>
 <preamble; separator="\n">
 switch(try getInterpreter().adaptivePredict(_input,<choice.decision>, _ctx)) {
 <alts:{alt |
@@ -625,8 +635,8 @@ bitsetBitfieldComparison(s, bits) ::= <<
    let test = (<testShiftInRange({<offsetShift(s.varName, bits.shift)>})>)
    let temp = Int64((<offsetShift(s.varName, bits.shift)> \< 0) ? (64 + (<offsetShift(s.varName, bits.shift)> % 64 )) : (<offsetShift(s.varName, bits.shift)> % 64))
    let test1 = (Int64(1) \<\< temp)
-   var test2 = (<first(bits.ttypes):{ttype | (Int64(1) \<\< Int64(<offsetShift(ttype, bits.shift)> % 64))}>)
-   <rest(bits.ttypes):{ttype | test2 = test2 | (Int64(1) \<\< Int64(<offsetShift(ttype, bits.shift)>  % 64))}; separator="\n">
+   var test2 = (<first(bits.ttypes):{ttype | (Int64(1) \<\< Int64(<offsetShift(parserName(ttype), bits.shift)> % 64))}>)
+   <rest(bits.ttypes):{ttype | test2 = test2 | (Int64(1) \<\< Int64(<offsetShift(parserName(ttype), bits.shift)>  % 64))}; separator="\n">
     return test && (( test1 & test2 ) != 0)
 }()
 >>
@@ -635,29 +645,45 @@ isZero ::= [
 "0": true,
 default: false
 ]
-
+parserName(ttype) ::= <%
+ <parser.name>.<ttype>
+%>
 offsetShift(shiftAmount, offset) ::= <%
 <if(!isZero.(offset))>(<shiftAmount> - <offset>)<else><shiftAmount><endif>
 %>
 
 // produces more efficient bytecode when bits.ttypes contains at most two items
 bitsetInlineComparison(s, bits) ::= <%
-<bits.ttypes:{ttype | <s.varName>==<ttype>}; separator=" || ">
+<bits.ttypes:{ttype | <s.varName> == <parser.name>.<ttype>}; separator=" || ">
 %>
 
 cases(ttypes) ::= <<
-<trunc(ttypes): {t | case <t>:fallthrough}  ; separator="\n">
-<last(ttypes): {t | case <t>:}  ; separator="\n">
+<trunc(ttypes): {t | case <parser.name>.<t>:fallthrough}  ; separator="\n">
+<last(ttypes): {t | case <parser.name>.<t>:}  ; separator="\n">
 >>
 
 InvokeRule(r, argExprsChunks) ::= <<
 setState(<r.stateNumber>)
-<if(r.labels)><r.labels:{l | <labelref(l)> = }><endif>try <r.name>(<if(r.ast.options.p)><r.ast.options.p><if(argExprsChunks)>,<endif><endif><argExprsChunks>)
+<if(r.labels)>
+try {
+		let assignmentValue = try <r.name>(<if(r.ast.options.p)><r.ast.options.p><if(argExprsChunks)>,<endif><endif><argExprsChunks>)
+		<r.labels:{l | <labelref(l)> = assignmentValue} ; separator="\n">
+     }()
+<else>
+try <r.name>(<if(r.ast.options.p)><r.ast.options.p><if(argExprsChunks)>,<endif><endif><argExprsChunks>)
+<endif>
 >>
 
 MatchToken(m) ::= <<
 setState(<m.stateNumber>)
-<if(m.labels)><m.labels:{l | <labelref(l)> = }><endif>try match(<m.name>)
+<if(m.labels)>
+try {
+		let assignmentValue = try match(<parser.name>.<m.name>)
+		<m.labels:{l | <labelref(l)> = assignmentValue}  ; separator="\n">
+     }()
+<else>
+try match(<parser.name>.<m.name>)
+<endif>
 >>
 
 MatchSet(m, expr, capture) ::= "<CommonSetStuff(m, expr, capture, false)>"
@@ -666,10 +692,10 @@ MatchNotSet(m, expr, capture) ::= "<CommonSetStuff(m, expr, capture, true)>"
 
 CommonSetStuff(m, expr, capture, invert) ::= <<
 setState(<m.stateNumber>)
-<if(m.labels)><m.labels:{l | <labelref(l)> = }>_input.LT(1);<endif>
+<if(m.labels)><m.labels:{l | <labelref(l)> = }>try _input.LT(1)<endif>
 <capture>
 if ( <if(invert)><m.varName> \<= 0 || <else>!<endif>(<expr>) ) {
-	<if(m.labels)><m.labels:{l | <labelref(l)> = (Token)}><endif>try _errHandler.recoverInline(self)
+	<if(m.labels)><m.labels:{l | <labelref(l)> = }><endif>try _errHandler.recoverInline(self)<if(m.labels)> as Token<endif>
 } else {
 	try consume()
 }
@@ -725,23 +751,23 @@ SetAttr(s,rhsChunks) ::= "<ctx(s)>.<s.name> = <rhsChunks>"
 TokenLabelType() ::= "<file.TokenLabelType; null={Token}>"
 InputSymbolType() ::= "<file.InputSymbolType; null={Token}>"
 
-TokenPropertyRef_text(t) ::= "(<ctx(t)>.<t.label> != nil ? <ctx(t)>.<t.label>!.getText() : nil)"
+TokenPropertyRef_text(t) ::= "(<ctx(t)>.<t.label> != nil ? <ctx(t)>.<t.label>!.getText()! : \"\")"
 TokenPropertyRef_type(t) ::= "(<ctx(t)>.<t.label> != nil ? <ctx(t)>.<t.label>!.getType() : 0)"
-TokenPropertyRef_line(t) ::= "(<ctx(t)>.<t.label>  = nil ? <ctx(t)>.<t.label>!.getLine() : 0)"
+TokenPropertyRef_line(t) ::= "(<ctx(t)>.<t.label> != nil ? <ctx(t)>.<t.label>!.getLine() : 0)"
 TokenPropertyRef_pos(t) ::= "(<ctx(t)>.<t.label> != nil ? <ctx(t)>.<t.label>!.getCharPositionInLine() : 0)"
-TokenPropertyRef_channel(t) ::= "(<ctx(t)>.<t.label> != nil ?<ctx(t)>.<t.label>!.getChannel() : 0)"
+TokenPropertyRef_channel(t) ::= "(<ctx(t)>.<t.label> != nil ? <ctx(t)>.<t.label>!.getChannel() : 0)"
 TokenPropertyRef_index(t) ::= "(<ctx(t)>.<t.label> != nil ? <ctx(t)>.<t.label>!.getTokenIndex() : 0)"
-TokenPropertyRef_int(t) ::= "(<ctx(t)>.<t.label> != nil ? Int(<ctx(t)>.<t.label>!.getText()) : 0)"
+TokenPropertyRef_int(t) ::= "(<ctx(t)>.<t.label> != nil ? Int(<ctx(t)>.<t.label>!.getText()!) : 0)"
 
-RulePropertyRef_start(r) ::= "(<ctx(r)>.<r.label> != nil ?(<ctx(r)>.<r.label>!.start) : nil)"
-RulePropertyRef_stop(r)	 ::= "(<ctx(r)>.<r.label> != nil ?(<ctx(r)>.<r.label>!.stop) : nil)"
-RulePropertyRef_text(r)	 ::= "(<ctx(r)>.<r.label> != nil ?_input.getText(<ctx(r)>.<r.label>!.start,<ctx(r)>.<r.label>!.stop) : nil)"
+RulePropertyRef_start(r) ::= "(<ctx(r)>.<r.label> != nil ? (<ctx(r)>.<r.label>!.start?.description ?? \"\") : \"\")"
+RulePropertyRef_stop(r)	 ::= "(<ctx(r)>.<r.label> != nil ? (<ctx(r)>.<r.label>!.stop?.description ?? \"\") : \"\")"
+RulePropertyRef_text(r)	 ::= "(<ctx(r)>.<r.label> != nil ? try _input.getText(<ctx(r)>.<r.label>!.start,<ctx(r)>.<r.label>!.stop) : \"\")"
 RulePropertyRef_ctx(r)	 ::= "<ctx(r)>.<r.label>"
 RulePropertyRef_parser(r)	 ::= "self"
 
 ThisRulePropertyRef_start(r) ::= "_localctx.start"
 ThisRulePropertyRef_stop(r)	 ::= "_localctx.stop"
-ThisRulePropertyRef_text(r)	 ::= "_input.getText(_localctx.start, _input.LT(-1))"
+ThisRulePropertyRef_text(r)	 ::= "(try _input.getText(_localctx.start, try _input.LT(-1)))"
 ThisRulePropertyRef_ctx(r)	 ::= "_localctx"
 ThisRulePropertyRef_parser(r)	 ::= "self"
 
@@ -749,21 +775,21 @@ NonLocalAttrRef(s)		 ::= "((<s.ruleName; format=\"cap\">Context)getInvokingConte
 SetNonLocalAttr(s, rhsChunks)	  ::=
 	"((<s.ruleName; format=\"cap\">Context)getInvokingContext(<s.ruleIndex>)).<s.name> = <rhsChunks>"
 
-AddToLabelList(a) ::= "<ctx(a.label)>.<a.listName>.add(<labelref(a.label)>)"
+AddToLabelList(a) ::= "<ctx(a.label)>.<a.listName>.append(<labelref(a.label)>)"
 
-TokenDecl(t) ::= "var <t.name>: <TokenLabelType()>!"
-TokenTypeDecl(t) ::= "var <t.name>: Int"
-TokenListDecl(t) ::= "var <t.name>: Array\<Token>  =   Array\<Token>()"
-RuleContextDecl(r) ::= "var <r.name>: <r.ctxName>!"
-RuleContextListDecl(rdecl) ::= "var <rdecl.name>:Array\<<rdecl.ctxName>> = Array\<<rdecl.ctxName>>()"
+TokenDecl(t) ::= "<t.name>: <SwiftTypeMap.(TokenLabelType())>!"
+TokenTypeDecl(t) ::= "var <t.name>: Int = 0"
+TokenListDecl(t) ::= "<t.name>: Array\<Token> = Array\<Token>()"
+RuleContextDecl(r) ::= "<r.name>: <r.ctxName>!"
+RuleContextListDecl(rdecl) ::= "<rdecl.name>:Array\<<rdecl.ctxName>> = Array\<<rdecl.ctxName>>()"
 
 ContextTokenGetterDecl(t)      ::=
-    "public func <t.name>() -> TerminalNode? { return getToken(host.<t.name>, 0) }"
+    "public func <t.name>() -> TerminalNode? { return getToken(<parser.name>.<t.name>, 0) }"
 ContextTokenListGetterDecl(t)  ::=
-    "public func <t.name>() -> Array\<TerminalNode> { return getTokens(host.<t.name>) }"
+    "public func <t.name>() -> Array\<TerminalNode> { return getTokens(<parser.name>.<t.name>) }"
 ContextTokenListIndexedGetterDecl(t)  ::= <<
 public func <t.name>(i:Int) -> TerminalNode?{
-	return getToken(host.<t.name>, i)
+	return getToken(<parser.name>.<t.name>, i)
 }
 >>
 ContextRuleGetterDecl(r)       ::= <<
@@ -789,8 +815,8 @@ LexerRuleContext() ::= "RuleContext"
  */
 RuleContextNameSuffix() ::= "Context"
 
-ImplicitTokenLabel(tokenName) ::= "<tokenName>"
-ImplicitRuleLabel(ruleName)	  ::= "<ruleName>"
+ImplicitTokenLabel(tokenName) ::= "_<tokenName>"
+ImplicitRuleLabel(ruleName)	  ::= "_<ruleName>"
 ImplicitSetLabel(id)		  ::= "_tset<id>"
 ListLabelName(label)		  ::= "<label>"
 
@@ -801,20 +827,20 @@ StructDecl(struct,ctorAttrs,attrs,getters,dispatchMethods,interfaces,extensionMe
            superClass={ParserRuleContext}) ::= <<
 public  class <struct.name>: <superClass><if(interfaces)>, <interfaces; separator=", "><endif> {
     weak var host: <parser.name>!
-	<attrs:{a | public <a>;}; separator="\n">
+	<attrs:{a | public var <a>}; separator="\n">
 	<getters:{g | <g>}; separator="\n">
-	<if(ctorAttrs)>public init(parent: ParserRuleContext, invokingState: Int) { super(parent, invokingState)  }<endif>
-	public convenience init(_ parent: ParserRuleContext?, _ invokingState<ctorAttrs:{a | , <a>}>: Int, _ host: <parser.name>) {
+	<! <if(ctorAttrs)>public init(_ parent: ParserRuleContext,_ invokingState: Int) { super.init(parent, invokingState)  }<endif> !>
+	public convenience init(_ parent: ParserRuleContext?, _ invokingState: Int<ctorAttrs:{a | , _ <a>}>, _ host: <parser.name>) {
 		self.init(parent, invokingState)
 		self.host = host
-		<struct.ctorAttrs:{a | this.<a.name> = <a.name>;}; separator="\n">
+		<struct.ctorAttrs:{a | self.<a.name> = <a.name>;}; separator="\n">
 	}
-	public override func getRuleIndex() -> Int { return host.RULE_<struct.derivedFromName>  }
+	public override func getRuleIndex() -> Int { return <parser.name>.RULE_<struct.derivedFromName>  }
 <if(struct.provideCopyFrom)> <! don't need copy unless we have subclasses !>
 	<!public init() { }!>
 	public  func copyFrom(ctx: <struct.name>) {
 		super.copyFrom(ctx)
-		<struct.attrs:{a | this.<a.name> = ctx.<a.name>;}; separator="\n">
+		<struct.attrs:{a | self.<a.name> = ctx.<a.name>;}; separator="\n">
 	}
 <endif>
 	<dispatchMethods; separator="\n">
@@ -824,10 +850,11 @@ public  class <struct.name>: <superClass><if(interfaces)>, <interfaces; separato
 
 AltLabelStructDecl(struct,attrs,getters,dispatchMethods) ::= <<
 public  final class <struct.name>: <currentRule.name; format="cap">Context {
-	<attrs:{a | public <a>;}; separator="\n">
+	<attrs:{a | public var <a>}; separator="\n">
 	<getters:{g | <g>}; separator="\n">
-	public convenience init(_ ctx: <currentRule.name; format="cap">Context ) {
-		self.init()
+	public init(_ ctx: <currentRule.name; format="cap">Context) {
+		super.init()
+		self.host = ctx.host
 		copyFrom(ctx)
 	}
 	<dispatchMethods; separator="\n">
@@ -855,13 +882,13 @@ public func accept\<T>(visitor: ParseTreeVisitor\<T>) -> T? {
 }
 >>
 
-AttributeDecl(d) ::= "<d.type> <d.name><if(d.initValue)> = <d.initValue><endif>"
+AttributeDecl(d) ::= "<d.name>: <SwiftTypeMap.(d.type)><if(d.initValue)> = <d.initValue><else>!<endif>"
 
-/** If we don't know location of label def x, use this template */
-labelref(x) ::= "<if(!x.isLocal)>(_localctx as <x.ctx.name>!).<endif><x.name>"
+/** If we don't know location of label def x, use this template (_localctx as! <x.ctx.name> */
+labelref(x) ::= "<if(!x.isLocal)>_localctx.castdown(<x.ctx.name>).<endif><x.name>"
 
-/** For any action chunk, what is correctly-typed context struct ptr? */
-ctx(actionChunk) ::= "(_localctx as  <actionChunk.ctx.name>!)"
+/** For any action chunk, what is correctly-typed context struct ptr?    */
+ctx(actionChunk) ::= "_localctx.castdown(<actionChunk.ctx.name>)"
 
 // used for left-recursive rules
 recRuleAltPredicate(ruleName,opPrec)  ::= "precpred(_ctx, <opPrec>)"
@@ -869,28 +896,28 @@ recRuleSetReturnAction(src,name)	  ::= "$<name>=$<src>.<name>"
 recRuleSetStopToken()                 ::= "_ctx!.stop = try _input.LT(-1)"
 
 recRuleAltStartAction(ruleName, ctxName, label, isListLabel) ::= <<
-_localctx = <ctxName>Context(_parentctx, _parentState);
+_localctx = <ctxName>Context(_parentctx, _parentState, self);
 <if(label)>
 <if(isListLabel)>
-_localctx.<label>.add(_prevctx)
+_localctx.<label>.append(_prevctx)
 <else>
 _localctx.<label> = _prevctx
 <endif>
 <endif>
 <if(label)>_localctx.<label> = _prevctx;<endif>
-try pushNewRecursionContext(_localctx, _startState, RULE_<ruleName>)
+try pushNewRecursionContext(_localctx, _startState, <parser.name>.RULE_<ruleName>)
 >>
 
 recRuleLabeledAltStartAction(ruleName, currentAltLabel, label, isListLabel) ::= <<
-_localctx = <currentAltLabel; format="cap">Context(  <ruleName; format="cap">Context(_parentctx, _parentState))
+_localctx = <currentAltLabel; format="cap">Context(  <ruleName; format="cap">Context(_parentctx, _parentState, self))
 <if(label)>
 <if(isListLabel)>
-((<currentAltLabel; format="cap">Context)_localctx).<label>.add(_prevctx)
+(_localctx as! <currentAltLabel; format="cap">Context).<label>.append(_prevctx)
 <else>
-((<currentAltLabel; format="cap">Context)_localctx).<label> = _prevctx
+(_localctx as! <currentAltLabel; format="cap">Context).<label> = _prevctx
 <endif>
 <endif>
-try pushNewRecursionContext(_localctx, _startState, RULE_<ruleName>)
+try pushNewRecursionContext(_localctx, _startState, <parser.name>.RULE_<ruleName>)
 >>
 
 recRuleReplaceContext(ctxName) ::= <<
@@ -928,7 +955,7 @@ public class <lexer.name>: <superClass; null="Lexer"> {
            return decisionToDFA
      }()
 
-	internal let _sharedContextCache:PredictionContextCache = PredictionContextCache()
+	internal static let _sharedContextCache:PredictionContextCache = PredictionContextCache()
 	public static let <lexer.tokens:{k | <k>=<lexer.tokens.(k)>}; separator=", ", wrap, anchor>
 	<if(lexer.channels)>
 	   public let <lexer.channels:{k | <k>=<lexer.channels.(k)>}; separator=", ", wrap, anchor>
@@ -952,7 +979,7 @@ public class <lexer.name>: <superClass; null="Lexer"> {
 	public override init(_ input: CharStream) {
 	    RuntimeMetaData.checkVersion("<lexerFile.ANTLRVersion>", RuntimeMetaData.VERSION)
 		super.init(input)
-		_interp = LexerATNSimulator(self, <lexer.name>._ATN, <lexer.name>._decisionToDFA,_sharedContextCache)
+		_interp = LexerATNSimulator(self, <lexer.name>._ATN, <lexer.name>._decisionToDFA, <lexer.name>._sharedContextCache)
 	}
 
 	override
