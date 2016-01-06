@@ -2,7 +2,7 @@
 # ANTLR v4.5.1 Swift Target
 
 #### Usage
-Download: [antlr4.5.1.withSwiftSupport.ZIP](https://github.com/janyou/ANTLR-Swift-Target/releases/download/v0.1/antlr4.5.1.withSwiftSupport.ZIP) and uncompress
+Download: [antlr4-4.5.1.jar](https://github.com/janyou/ANTLR-Swift-Target/blob/master/pre-release/antlr4-4.5.1.jar)  
 
 Example: generate lexer/parser/visitor from Hello.g file
 
