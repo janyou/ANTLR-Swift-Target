@@ -115,7 +115,7 @@ org/antlr/v4/test/runtime/templates/CompositeParsers/DelegatorRuleOverridesLooka
 to folder
 
 ```
-[uncompress folder]//runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/CompositeParsers
+[uncompress folder]/runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/CompositeParsers
 ```
 
 (5).MultipleAlternativesWithCommonLabel.stg
@@ -126,7 +126,7 @@ org/antlr/v4/test/runtime/templates/LeftRecursion/MultipleAlternativesWithCommon
 to folder
 
 ```
-[uncompress folder]//runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/LeftRecursion
+[uncompress folder]/runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/LeftRecursion
 ```
 (6).ReferenceToATN.stg
 
@@ -136,7 +136,7 @@ to folder
 to folder
 
 ```
-[uncompress folder]//runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/ParserExec
+[uncompress folder]/runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/ParserExec
 ```
 (7).TokenAndRuleContextString.stg
 
@@ -146,7 +146,7 @@ to folder
 to folder
 
 ```
-[uncompress folder]//runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/ParseTrees
+[uncompress folder]/runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/ParseTrees
 ```
 
 ####4.Maven build
