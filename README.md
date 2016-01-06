@@ -10,7 +10,7 @@ Example: generate lexer/parser/visitor from Hello.g file
 java -cp antlr4-4.5.1.jar  org.antlr.v4.Tool -Dlanguage=Swift -visitor -o gen Hello.g4
 ```
 
-in｀gen｀ folder：
+in `gen` folder：
 
 ``` 
 Hello.tokens
