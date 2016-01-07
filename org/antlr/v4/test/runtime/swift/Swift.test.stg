@@ -231,9 +231,12 @@ TokenStartColumnEquals(i) ::= <%self._tokenStartCharPositionInLine == <i>%>
 
 ImportListener(X) ::= ""
 
+OptionalValue(value) ::= "<value>!"
+
+
 GetExpectedTokenNames() ::= "try self.getExpectedTokens().toString(self.tokenNames)"
 
-RuleInvocationStack() ::= "getRuleInvocationStack()"
+RuleInvocationStack() ::= "getRuleInvocationStack().description.stringByReplacingOccurrencesOfString(\"\\\"\", withString: \"\")"
 
 LL_EXACT_AMBIG_DETECTION() ::= <<_interp.setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);>>
 
@@ -418,7 +421,7 @@ func pred(v: Bool) -> Bool {
 
 Invoke_pred(v) ::= <<self.pred(<v>)>>
 
- 
+
 isEmpty ::= [
 	"": true,
 	default: false

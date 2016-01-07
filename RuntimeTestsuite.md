@@ -127,7 +127,11 @@ to folder
 
 ```
 [uncompress folder]/runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/LeftRecursion
+
 ```
+
+*note: other targets'.test.stg added:  `OptionalValue(value) ::= "<value>"`*
+
 (6).ReferenceToATN.stg
 
 ```
@@ -138,16 +142,7 @@ to folder
 ```
 [uncompress folder]/runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/ParserExec
 ```
-(7).TokenAndRuleContextString.stg
 
-```
- org/antlr/v4/test/runtime/templates/ParseTrees/TokenAndRuleContextString.stg
-```
-to folder
-
-```
-[uncompress folder]/runtime-testsuite/resources/org/antlr/v4/test/runtime/templates/ParseTrees
-```
 
 ####4.Maven build
 
