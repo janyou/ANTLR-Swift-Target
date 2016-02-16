@@ -232,7 +232,8 @@ public class <parser.name>: <superClass; null="Parser"> {
 
 	internal static var _decisionToDFA: [DFA] = {
           var decisionToDFA = [DFA]()
-          for var i: Int = 0; i \< <parser.name>._ATN.getNumberOfDecisions(); i++ {
+          let length = <parser.name>._ATN.getNumberOfDecisions()
+          for i in 0..\<length {
            <!// decisionToDFA[i] = DFA(<parser.name>._ATN.getDecisionState(i)!, i);!>
             decisionToDFA.append(DFA(<parser.name>._ATN.getDecisionState(i)!, i))
            }
@@ -301,8 +302,8 @@ public static let VOCABULARY: Vocabulary = Vocabulary(_LITERAL_NAMES, _SYMBOLIC_
 //@Deprecated
 public let tokenNames: [String?]? = {
     var tokenNames = [String?]()
-
-	for  var i : Int = 0; i \< _SYMBOLIC_NAMES.count; i++ {
+    let length = _SYMBOLIC_NAMES.count
+	for i in 0..\<length {
 		var name = VOCABULARY.getLiteralName(i)
 		if name == nil {
 			name = VOCABULARY.getSymbolicName(i)
@@ -948,7 +949,8 @@ Lexer(lexer, atn, actionFuncs, sempredFuncs, superClass) ::= <<
 public class <lexer.name>: <superClass; null="Lexer"> {
 	internal static var _decisionToDFA: [DFA] = {
           var decisionToDFA = [DFA]()
-          for var i: Int = 0; i \< <lexer.name>._ATN.getNumberOfDecisions(); i++ {
+          let length = <lexer.name>._ATN.getNumberOfDecisions()
+          for i in 0..\<length {
             <! decisionToDFA[i] = DFA(<lexer.name>._ATN.getDecisionState(i)!, i);!>
           	    decisionToDFA.append(DFA(<lexer.name>._ATN.getDecisionState(i)!, i))
           }
