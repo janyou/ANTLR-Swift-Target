@@ -301,18 +301,17 @@ public static let VOCABULARY: Vocabulary = Vocabulary(_LITERAL_NAMES, _SYMBOLIC_
  */
 //@Deprecated
 public let tokenNames: [String?]? = {
-    var tokenNames = [String?]()
     let length = _SYMBOLIC_NAMES.count
+    var tokenNames = [String?](count: length, repeatedValue: nil)
 	for i in 0..\<length {
 		var name = VOCABULARY.getLiteralName(i)
 		if name == nil {
 			name = VOCABULARY.getSymbolicName(i)
 		}
-
 		if name == nil {
 			name = "\<INVALID>"
 		}
-		 tokenNames.append(name)
+		tokenNames[i] = name
 	}
 	return tokenNames
 }()
@@ -322,7 +321,6 @@ override
 public func getTokenNames() -> [String?]? {
 	return tokenNames
 }
-
 >>
 
 dumpActions(recog, argFuncs, actionFuncs, sempredFuncs) ::= <<
@@ -346,7 +344,7 @@ public func sempred(_localctx: RuleContext?, _  ruleIndex: Int,_   predIndex: In
 	<recog.sempredFuncs.values:{f|
 case <f.ruleIndex>:
 	return try <f.name>_sempred(_localctx?.castdown(<f.ctxType>), predIndex)}; separator="\n">
-	default: 	return true
+	default: return true
 	}
 	<!return true;!>
 }
@@ -357,8 +355,9 @@ case <f.ruleIndex>:
 parser_ctor(p) ::= <<
 
 public override func getVocabulary() -> Vocabulary {
-        return <p.name>.VOCABULARY;
+    return <p.name>.VOCABULARY
 }
+
 public override  init(_ input:TokenStream)throws {
     RuntimeMetaData.checkVersion("4.5.1", RuntimeMetaData.VERSION)
 	try super.init(input)
@@ -396,13 +395,11 @@ private func <r.name>_sempred(_localctx: <r.ctxType>!,  _ predIndex: Int) throws
 >>
 
 RuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,namedActions,finallyAction,postamble,exceptions) ::= <<
-
 <ruleCtx>
 <altLabelCtxs:{l | <altLabelCtxs.(l)>}; separator="\n">
-
 <if(currentRule.modifiers)><currentRule.modifiers:{f | <f> }><else>public func <endif><currentRule.name>(<args; separator=",">) throws -> <currentRule.ctxType> {
-	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, getState()<currentRule.args:{a | , <a.name>}>, self)
-	try enterRule(_localctx, <currentRule.startState>,  <parser.name>.RULE_<currentRule.name>)
+	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, getState()<currentRule.args:{a | , <a.name>}>)
+	try enterRule(_localctx, <currentRule.startState>, <parser.name>.RULE_<currentRule.name>)
 	<namedActions.init>
 	<locals; separator="\n">
 	do {
@@ -416,7 +413,7 @@ RuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,namedActions,fina
 	<if(exceptions)>
 	<exceptions; separator="\n">
 	<else>
-	catch ANTLRException.Recognition(let  re ) {
+	catch ANTLRException.Recognition(let re) {
 		_localctx.exception = re
 		_errHandler.reportError(self, re)
 		try _errHandler.recover(self, re)
@@ -441,10 +438,10 @@ LeftRecursiveRuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,
 	return try <currentRule.name>(0<currentRule.args:{a | , <a.name>}>)
 }
 
-private func <currentRule.name>(_p<args:{a | , <a>}> :Int) throws -> <currentRule.ctxType>   {
+private func <currentRule.name>(_p<args:{a | , <a>}>: Int) throws -> <currentRule.ctxType>   {
 	let _parentctx: ParserRuleContext? = _ctx
 	var _parentState: Int = getState()
-	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, _parentState<currentRule.args:{a | , <a.name>}>, self)
+	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, _parentState<currentRule.args:{a | , <a.name>}>)
 	var  _prevctx: <currentRule.ctxType> = _localctx
 	var _startState: Int = <currentRule.startState>
 	try enterRecursionRule(_localctx, <currentRule.startState>, <parser.name>.RULE_<currentRule.name>, _p)
@@ -452,13 +449,13 @@ private func <currentRule.name>(_p<args:{a | , <a>}> :Int) throws -> <currentRul
 	<locals; separator="\n">
 	do {
 <if(currentRule.hasLookaheadBlock)>
-		var _alt: Int;
+		var _alt: Int
 <endif>
 		<code>
 		<postamble; separator="\n">
 		<namedActions.after>
 	}
-	catch ANTLRException.Recognition(let  re ) {
+	catch ANTLRException.Recognition(let re) {
 		_localctx.exception = re
 		_errHandler.reportError(self, re)
 		try _errHandler.recover(self, re)
@@ -493,7 +490,7 @@ setState(<choice.stateNumber>)
 switch (try _input.LA(1)) {
 <choice.altLook,alts:{look,alt | <cases(ttypes=look)>
 	<alt>
-	break;}; separator="\n">
+	break}; separator="\n">
 default:
 	<error>
 }
@@ -505,7 +502,7 @@ setState(<choice.stateNumber>)
 switch (try _input.LA(1)) {
 <choice.altLook,alts:{look,alt| <cases(ttypes=look)>
  	<alt>
-	break;}; separator="\n">
+	break}; separator="\n">
 default:
 	<error>
 }
@@ -525,7 +522,6 @@ LL1StarBlockSingleAlt(choice, loopExpr, alts, preamble, iteration) ::= <<
 setState(<choice.stateNumber>)
 try _errHandler.sync(self)
 <preamble; separator="\n">
-
 while (<loopExpr>) {
 	<alts; separator="\n">
 	setState(<choice.loopBackStateNumber>)
@@ -543,7 +539,7 @@ repeat {
 	setState(<choice.stateNumber>); <! loopback/exit decision !>
 	try _errHandler.sync(self)
 	<iteration>
-} while ( <loopExpr> );
+} while (<loopExpr>)
 >>
 
 // LL(*) stuff
@@ -557,21 +553,20 @@ switch(try getInterpreter().adaptivePredict(_input,<choice.decision>, _ctx)) {
 <alts:{alt |
 case <i>:
 	<alt>
-	break;}; separator="\n">
-default: break;
-
+	break}; separator="\n">
+default: break
 }
 >>
 
 OptionalBlock(choice, alts, error) ::= <<
 setState(<choice.stateNumber>)
 <!try _errHandler.sync(self);!>
-switch (try getInterpreter().adaptivePredict(_input,<choice.decision>,_ctx) ) {
+switch (try getInterpreter().adaptivePredict(_input,<choice.decision>,_ctx)) {
 <alts:{alt |
 case <i><if(!choice.ast.greedy)>+1<endif>:
 	<alt>
-	break;}; separator="\n">
-default: break;
+	break}; separator="\n">
+default: break
 }
 >>
 
@@ -579,7 +574,7 @@ StarBlock(choice, alts, sync, iteration) ::= <<
 setState(<choice.stateNumber>)
 try _errHandler.sync(self)
 _alt = try getInterpreter().adaptivePredict(_input,<choice.decision>,_ctx)
-while ( _alt != <choice.exitAlt> && _alt != ATN.INVALID_ALT_NUMBER ) {
+while (_alt != <choice.exitAlt> && _alt != ATN.INVALID_ALT_NUMBER) {
 	if ( _alt==1<if(!choice.ast.greedy)>+1<endif> ) {
 		<iteration>
 		<alts> <! should only be one !>
@@ -599,14 +594,14 @@ repeat {
 	<alts:{alt|
 case <i><if(!choice.ast.greedy)>+1<endif>:
 	<alt>
-	break;}; separator="\n">
+	break}; separator="\n">
 	default:
 		<error>
 	}
 	setState(<choice.loopBackStateNumber>); <! loopback/exit decision !>
 	try _errHandler.sync(self)
 	_alt = try getInterpreter().adaptivePredict(_input,<choice.decision>,_ctx)
-} while ( _alt != <choice.exitAlt> && _alt !=  ATN.INVALID_ALT_NUMBER );
+} while (_alt != <choice.exitAlt> && _alt !=  ATN.INVALID_ALT_NUMBER)
 >>
 
 Sync(s) ::= "sync(<s.expecting.name>);"
@@ -619,7 +614,7 @@ TestSetInline(s) ::= <<
  { () -> Bool in
       <if(rest(s.bitsets))>var<else>let<endif> testSet = <first(s.bitsets):{bits | <if(rest(rest(bits.ttypes)))><bitsetBitfieldComparison(s, bits)><else><bitsetInlineComparison(s, bits)><endif>}>
           <rest(s.bitsets):{bits | testSet = testSet || <if(rest(rest(bits.ttypes)))><bitsetBitfieldComparison(s, bits)><else><bitsetInlineComparison(s, bits)><endif>}; separator="\n">
-       return testSet
+      return testSet
  }()
 >>
 
@@ -630,7 +625,6 @@ testShiftInRange(shiftAmount) ::= <<
 
 // produces smaller bytecode only when bits.ttypes contains more than two items
 bitsetBitfieldComparison(s, bits) ::= <<
-
 <!(<testShiftInRange({<offsetShift(s.varName, bits.shift)>})> && ((1 \<\< <offsetShift(s.varName, bits.shift)>) & (<bits.ttypes:{ttype | (1 \<\< <offsetShift(ttype, bits.shift)>)}; separator=" | ">)) != 0)!>
 {  () -> Bool in
    let test = (<testShiftInRange({<offsetShift(s.varName, bits.shift)>})>)
@@ -670,9 +664,7 @@ try {
 		let assignmentValue = try <r.name>(<if(r.ast.options.p)><r.ast.options.p><if(argExprsChunks)>,<endif><endif><argExprsChunks>)
 		<r.labels:{l | <labelref(l)> = assignmentValue} ; separator="\n">
      }()
-<else>
-try <r.name>(<if(r.ast.options.p)><r.ast.options.p><if(argExprsChunks)>,<endif><endif><argExprsChunks>)
-<endif>
+<else>try <r.name>(<if(r.ast.options.p)><r.ast.options.p><if(argExprsChunks)>,<endif><endif><argExprsChunks>)<endif>
 >>
 
 MatchToken(m) ::= <<
@@ -682,9 +674,7 @@ try {
 		let assignmentValue = try match(<parser.name>.<m.name>)
 		<m.labels:{l | <labelref(l)> = assignmentValue}  ; separator="\n">
      }()
-<else>
-try match(<parser.name>.<m.name>)
-<endif>
+<else>try match(<parser.name>.<m.name>)<endif>
 >>
 
 MatchSet(m, expr, capture) ::= "<CommonSetStuff(m, expr, capture, false)>"
@@ -695,7 +685,7 @@ CommonSetStuff(m, expr, capture, invert) ::= <<
 setState(<m.stateNumber>)
 <if(m.labels)><m.labels:{l | <labelref(l)> = }>try _input.LT(1)<endif>
 <capture>
-if ( <if(invert)><m.varName> \<= 0 || <else>!<endif>(<expr>) ) {
+if (<if(invert)><m.varName> \<= 0 || <else>!<endif>(<expr>)) {
 	<if(m.labels)><m.labels:{l | <labelref(l)> = }><endif>try _errHandler.recoverInline(self)<if(m.labels)> as Token<endif>
 } else {
 	try consume()
@@ -716,7 +706,7 @@ ArgAction(a, chunks) ::= "<chunks>"
 SemPred(p, chunks, failChunks) ::= <<
 setState(<p.stateNumber>)
 if (!(<chunks>)) {
-throw try ANTLRException.Recognition(e:FailedPredicateException(self, <p.predicate><if(failChunks)>, <failChunks><elseif(p.msg)>, <p.msg><endif>))
+    throw try ANTLRException.Recognition(e:FailedPredicateException(self, <p.predicate><if(failChunks)>, <failChunks><elseif(p.msg)>, <p.msg><endif>))
 }
 >>
 
@@ -827,16 +817,16 @@ CaptureNextTokenType(d) ::= "<d.varName> = try _input.LA(1)"
 StructDecl(struct,ctorAttrs,attrs,getters,dispatchMethods,interfaces,extensionMembers,
            superClass={ParserRuleContext}) ::= <<
 public  class <struct.name>: <superClass><if(interfaces)>, <interfaces; separator=", "><endif> {
-    weak var host: <parser.name>!
 	<attrs:{a | public var <a>}; separator="\n">
 	<getters:{g | <g>}; separator="\n">
 	<! <if(ctorAttrs)>public init(_ parent: ParserRuleContext,_ invokingState: Int) { super.init(parent, invokingState)  }<endif> !>
-	public convenience init(_ parent: ParserRuleContext?, _ invokingState: Int<ctorAttrs:{a | , _ <a>}>, _ host: <parser.name>) {
+	 <if(ctorAttrs)>
+	 public convenience init(_ parent: ParserRuleContext?, _ invokingState: Int<ctorAttrs:{a | , _ <a>}>) {
 		self.init(parent, invokingState)
-		self.host = host
 		<struct.ctorAttrs:{a | self.<a.name> = <a.name>;}; separator="\n">
-	}
-	public override func getRuleIndex() -> Int { return <parser.name>.RULE_<struct.derivedFromName>  }
+	 }
+	<endif>
+	public override func getRuleIndex() -> Int { return <parser.name>.RULE_<struct.derivedFromName> }
 <if(struct.provideCopyFrom)> <! don't need copy unless we have subclasses !>
 	<!public init() { }!>
 	public  func copyFrom(ctx: <struct.name>) {
@@ -855,7 +845,6 @@ public  final class <struct.name>: <currentRule.name; format="cap">Context {
 	<getters:{g | <g>}; separator="\n">
 	public init(_ ctx: <currentRule.name; format="cap">Context) {
 		super.init()
-		self.host = ctx.host
 		copyFrom(ctx)
 	}
 	<dispatchMethods; separator="\n">
@@ -865,7 +854,7 @@ public  final class <struct.name>: <currentRule.name; format="cap">Context {
 ListenerDispatchMethod(method) ::= <<
 override
 public func <if(method.isEnter)>enter<else>exit<endif>Rule(listener: ParseTreeListener) {
-	if (listener is <parser.grammarName>Listener) {
+	if listener is <parser.grammarName>Listener {
 	 	(listener as! <parser.grammarName>Listener).<if(method.isEnter)>enter<else>exit<endif><struct.derivedFromName; format="cap">(self)
 	}
 }
@@ -874,11 +863,11 @@ public func <if(method.isEnter)>enter<else>exit<endif>Rule(listener: ParseTreeLi
 VisitorDispatchMethod(method) ::= <<
 override
 public func accept\<T>(visitor: ParseTreeVisitor\<T>) -> T? {
-	if ( visitor is <parser.grammarName>Visitor ){
-	     return (visitor as! (<parser.grammarName>Visitor\<T>)).visit<struct.derivedFromName; format="cap">(self)
+	if visitor is <parser.grammarName>Visitor {
+	     return (visitor as! <parser.grammarName>Visitor\<T>).visit<struct.derivedFromName; format="cap">(self)
 	}
 	else {
-	      return visitor.visitChildren(self)
+	     return visitor.visitChildren(self)
 	}
 }
 >>
@@ -897,7 +886,7 @@ recRuleSetReturnAction(src,name)	  ::= "$<name>=$<src>.<name>"
 recRuleSetStopToken()                 ::= "_ctx!.stop = try _input.LT(-1)"
 
 recRuleAltStartAction(ruleName, ctxName, label, isListLabel) ::= <<
-_localctx = <ctxName>Context(_parentctx, _parentState, self);
+_localctx = <ctxName>Context(_parentctx, _parentState);
 <if(label)>
 <if(isListLabel)>
 _localctx.<label>.append(_prevctx)
@@ -910,7 +899,7 @@ try pushNewRecursionContext(_localctx, _startState, <parser.name>.RULE_<ruleName
 >>
 
 recRuleLabeledAltStartAction(ruleName, currentAltLabel, label, isListLabel) ::= <<
-_localctx = <currentAltLabel; format="cap">Context(  <ruleName; format="cap">Context(_parentctx, _parentState, self))
+_localctx = <currentAltLabel; format="cap">Context(  <ruleName; format="cap">Context(_parentctx, _parentState))
 <if(label)>
 <if(isListLabel)>
 (_localctx as! <currentAltLabel; format="cap">Context).<label>.append(_prevctx)
@@ -928,7 +917,7 @@ _prevctx = _localctx
 >>
 
 recRuleSetPrevCtx() ::= <<
-if ( _parseListeners != nil ) {
+if _parseListeners != nil {
    try triggerExitRuleEvent()
 }
 _prevctx = _localctx

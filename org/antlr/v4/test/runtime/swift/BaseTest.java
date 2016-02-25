@@ -148,12 +148,12 @@ public abstract class BaseTest {
 		//add antlr.swift
 		final ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		//TODO
-		final URL swiftRuntime = loader.getResource("Swift/Antlr4");
-		if ( swiftRuntime==null ) {
-			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
-		}
-		String swiftRuntimePath = swiftRuntime.getPath();
-		//String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
+//		final URL swiftRuntime = loader.getResource("Swift/Antlr4");
+//		if ( swiftRuntime==null ) {
+//			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
+//		}
+//		String swiftRuntimePath = swiftRuntime.getPath();
+		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
 		makeantlrFrameworkSrc(swiftRuntimePath,tmpdir);
 	}
 	private  void makeantlrFrameworkSrc(String frameworkDir,String buildDir) {
