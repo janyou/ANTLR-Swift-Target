@@ -18,10 +18,10 @@ HelloBaseListener.swift
 HelloBaseVisitor.swift
 HelloLexer.swift
 HelloLexer.tokens
-HelloLexerATN.json
+HelloLexerATN.swift
 HelloListener.swift
 HelloParser.swift
-HelloParserATN.json
+HelloParserATN.swift
 HelloVisitor.swift 
 ```
 

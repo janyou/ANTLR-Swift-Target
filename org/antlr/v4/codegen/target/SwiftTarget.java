@@ -90,22 +90,22 @@ public class SwiftTarget extends Target {
         super.genFile(g,outputFileST,fileName);
 
         if (g.isLexer()  && lexerAtnJSON == null) {
-            lexerAtnJSON = serializeTojson(g.atn);//.replaceAll("\"", "\\\\\"");
+            lexerAtnJSON = getLexerOrParserATNJson(g, fileName);
         } else if (!g.isLexer()  && parserAtnJSON == null && g.atn != null) {
-            parserAtnJSON =  serializeTojson(g.atn); //.replaceAll("\"","\\\\\"");
+            parserAtnJSON = getLexerOrParserATNJson(g, fileName);
         }
 
         if (fileName.endsWith(CodeGenerator.VOCAB_FILE_EXTENSION)) {
             String jsonFileName = fileName.substring(0,fileName.lastIndexOf(CodeGenerator.VOCAB_FILE_EXTENSION));
             if (lexerAtnJSON != null) {
-                jsonFileName = jsonFileName +   "ATN.json";
+                jsonFileName = jsonFileName +   "ATN.swift";
                 // System.out.println(jsonFileName);
                 //System.out.println(lexerAtnJSON);
                 writeFile(lexerAtnJSON,g,jsonFileName);
             }
 
             if (parserAtnJSON != null) {
-                jsonFileName = jsonFileName +   "ParserATN.json";
+                jsonFileName = jsonFileName +   "ParserATN.swift";
                 // System.out.println(jsonFileName);
                 //System.out.println(parserAtnJSON);
                 writeFile(parserAtnJSON,g,jsonFileName);
@@ -118,6 +118,17 @@ public class SwiftTarget extends Target {
 //
         //getCodeGenerator().write(outputFileST, fileName);
     }
+
+    private String getLexerOrParserATNJson(Grammar g, String fileName) {
+        ST extST = getTemplates().getInstanceOf("codeFileExtension");
+        String className = fileName.substring(0,fileName.lastIndexOf(extST.render()));
+
+        String JSON = "class " + className + "ATN {\n" +
+                "    let jsonString: String = \"" +
+                serializeTojson(g.atn).replaceAll("\"","\\\\\"") +"\"\n}" ;  //.replaceAll("\"", "\\\\\"");
+        return JSON;
+    }
+
     private  void writeFile(String content,Grammar g,String fileName) {
 
         try {

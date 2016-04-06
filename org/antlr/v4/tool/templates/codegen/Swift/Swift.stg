@@ -281,7 +281,7 @@ case  <f.ruleIndex>:
 <endif>
 
 	<atn>
-   public static let _serializedATN : String = Utils.readFile2String( "<parser.name>ATN.json")
+   public static let _serializedATN : String = <parser.name>ATN().jsonString
    public static let _ATN: ATN = ATNDeserializer().deserializeFromJson(_serializedATN)
         	<!  //ATNDeserializer().deserialize(Array(  <parser.name>._serializedATN.characters));!>
 }
@@ -990,7 +990,7 @@ public class <lexer.name>: <superClass; null="Lexer"> {
 
 	<dumpActions(lexer, "", actionFuncs, sempredFuncs)>
 	<atn>
-    public static let _serializedATN: String = Utils.readFile2String("<lexer.name>ATN.json")
+    public static let _serializedATN: String = <lexer.name>ATN().jsonString
 	public static let _ATN: ATN = ATNDeserializer().deserializeFromJson(_serializedATN)
 
     	<! ATNDeserializer().deserialize(Array(  <lexer.name>._serializedATN.characters));!>

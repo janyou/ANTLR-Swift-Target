@@ -153,7 +153,7 @@ public abstract class BaseTest {
 			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
 		}
 		String swiftRuntimePath = swiftRuntime.getPath();
-		//String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
+// 		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
 		makeantlrFrameworkSrc(swiftRuntimePath,tmpdir);
 	}
 	private  void makeantlrFrameworkSrc(String frameworkDir,String buildDir) {
@@ -363,9 +363,11 @@ public abstract class BaseTest {
 		List<String> files = new ArrayList<String>();
 		if ( lexerName!=null ) {
 			files.add(lexerName+".swift");
+			files.add(lexerName+"ATN.swift");
 		}
 		if ( parserName!=null ) {
 			files.add(parserName+".swift");
+			files.add(parserName+"ATN.swift");
 			Set<String> optionsSet = new HashSet<String>(Arrays.asList(extraOptions));
 			String grammarName = grammarFileName.substring(0, grammarFileName.lastIndexOf('.'));
 			if (!optionsSet.contains("-no-listener")) {
