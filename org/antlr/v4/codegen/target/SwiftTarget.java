@@ -32,16 +32,16 @@ public class SwiftTarget extends Target {
     private static final ThreadLocal<STGroup> targetTemplates = new ThreadLocal<STGroup>();
 
     protected static final String[] swiftKeywords = {
-            "class", "deinit", "enum", "extension", "func", "import", "init", "inout", "internal",
+            "associatedtype", "class", "deinit", "enum", "extension", "func", "import", "init", "inout", "internal",
             "let", "operator", "private", "protocol", "public", "static", "struct", "subscript", "typealias", "var",
             "break", "case", "continue", "default", "defer", "do", "else", "fallthrough", "for", "guard", "if",
             "in", "repeat", "return", "switch", "where", "while",
             "as", "catch", "dynamicType", "false", "is", "nil", "rethrows", "super", "self", "Self", "throw", "throws",
-            "true", "try", "__COLUMN__", "__FILE__", "__FUNCTION__","__LINE__",
+            "true", "try", "__COLUMN__", "__FILE__", "__FUNCTION__","__LINE__", "#column", "#file", "#function", "#line", "_" , "#available", "#else", "#elseif", "#endif", "#if", "#selector",
             "associativity", "convenience", "dynamic", "didSet", "final", "get", "infix", "indirect", "lazy",
             "left", "mutating", "none", "nonmutating", "optional", "override", "postfix", "precedence",
             "prefix", "Protocol", "required", "right", "set", "Type", "unowned", "weak", "willSet"
-    };
+ };
 
     /** Avoid grammar symbols in this set to prevent conflicts in gen'd code. */
     protected final Set<String> badWords = new HashSet<String>();

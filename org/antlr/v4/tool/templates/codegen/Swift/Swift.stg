@@ -184,7 +184,7 @@ public class <file.grammarName>Visitor\<T>: ParseTreeVisitor\<T> {
 - returns: the visitor result
  */
 public func visit<lname; format="cap">(ctx: <file.parserName>.<lname; format="cap">Context) -> T{
- 	fatalError(__FUNCTION__ + " must be overridden")
+ 	fatalError(#function + " must be overridden")
 \}
 }; separator="\n">
 }

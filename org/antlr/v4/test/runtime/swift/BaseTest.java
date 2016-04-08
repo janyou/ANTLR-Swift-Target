@@ -93,6 +93,9 @@ public abstract class BaseTest {
 	public static final boolean CREATE_PER_TEST_DIRECTORIES;
 
 	public static final String EXEC_NAME = "Test";
+
+	public static String ANTLR_FRAMEWORK;
+
 	static {
 		String baseTestDir = System.getProperty("antlr-swift-test-dir");
 		boolean perTestDirectories = false;
@@ -107,6 +110,34 @@ public abstract class BaseTest {
 
 		BASE_TEST_DIR = baseTestDir;
 		CREATE_PER_TEST_DIRECTORIES = perTestDirectories;
+
+		//add antlr.swift
+		final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		//TODO
+		final URL swiftRuntime = loader.getResource("Swift/Antlr4");
+		if ( swiftRuntime==null ) {
+			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
+		}
+		String swiftRuntimePath = swiftRuntime.getPath();
+
+// 		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
+
+		try {
+			String commandLine = "find " + swiftRuntimePath +  "/ -iname *.swift -not -name merge.swift -exec cat {} ;" ;
+			ProcessBuilder builder = new ProcessBuilder(commandLine.split(" "));
+			builder.redirectError(ProcessBuilder.Redirect.INHERIT);
+			Process p = builder.start();
+			StreamVacuum stdoutVacuum = new StreamVacuum(p.getInputStream());
+			stdoutVacuum.start();
+			p.waitFor();
+			stdoutVacuum.join();
+			ANTLR_FRAMEWORK = stdoutVacuum.toString();
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String tmpdir = null;
@@ -145,31 +176,9 @@ public abstract class BaseTest {
 
 	}
 	private void copyAntlrFramework(){
-		//add antlr.swift
-		final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		//TODO
-		final URL swiftRuntime = loader.getResource("Swift/Antlr4");
-		if ( swiftRuntime==null ) {
-			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
-		}
-		String swiftRuntimePath = swiftRuntime.getPath();
-// 		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
-		makeantlrFrameworkSrc(swiftRuntimePath,tmpdir);
+		 writeFile(tmpdir,"Antlr4.swift",ANTLR_FRAMEWORK);
 	}
-	private  void makeantlrFrameworkSrc(String frameworkDir,String buildDir) {
-		try {
-			String commandLine = "find " + frameworkDir +  "/ -iname *.swift -not -name merge.swift -exec cat {} ;" ;
-			ProcessBuilder builder = new ProcessBuilder(commandLine.split(" "));
-			builder.redirectOutput(new File(buildDir + "/Antlr4.swift"));
-			builder.redirectError(ProcessBuilder.Redirect.INHERIT);
-			Process p = builder.start();
-			p.waitFor();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+
 	protected Tool newTool(String[] args) {
 		Tool tool = new Tool(args);
 		return tool;
@@ -638,7 +647,7 @@ public abstract class BaseTest {
 					"    func visitErrorNode(node: ErrorNode){ }\n" +
 					"    func enterEveryRule(ctx: ParserRuleContext) throws { }\n" +
 					"    func exitEveryRule(ctx: ParserRuleContext) throws {\n" +
-					"        for var i = 0; i \\< ctx.getChildCount(); i++ {\n" +
+					"        for i in 0..\\<ctx.getChildCount() {\n" +
 					"            let parent = ctx.getChild(i)?.getParent()\n" +
 					"            if (!(parent is RuleNode) || (parent as! RuleNode ).getRuleContext() !== ctx) {\n" +
 					"                throw ANTLRError.IllegalState(msg: \"Invalid parse tree shape detected.\")\n" +
