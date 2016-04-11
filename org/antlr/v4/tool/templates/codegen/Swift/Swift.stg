@@ -114,7 +114,9 @@ import Antlr4
  * of the available methods.
  */
 public class <file.grammarName>BaseListener: <file.grammarName>Listener {
+    public init() { \}
 	<file.listenerNames:{lname |
+
 /**
  * {@inheritDoc\}
  *
