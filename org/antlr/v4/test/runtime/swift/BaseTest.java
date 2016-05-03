@@ -120,7 +120,7 @@ public abstract class BaseTest {
 		}
 		String swiftRuntimePath = swiftRuntime.getPath();
 
-// 		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
+//		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
 
 		try {
 			String commandLine = "find " + swiftRuntimePath +  "/ -iname *.swift -not -name merge.swift -exec cat {} ;" ;

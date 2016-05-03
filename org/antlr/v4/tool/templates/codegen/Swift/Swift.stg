@@ -867,7 +867,9 @@ override
 public func accept\<T>(visitor: ParseTreeVisitor\<T>) -> T? {
 	if visitor is <parser.grammarName>Visitor {
 	     return (visitor as! <parser.grammarName>Visitor\<T>).visit<struct.derivedFromName; format="cap">(self)
-	}
+	}else if visitor is <parser.grammarName>BaseVisitor {
+    	 return (visitor as! <parser.grammarName>BaseVisitor\<T>).visit<struct.derivedFromName; format="cap">(self)
+    }
 	else {
 	     return visitor.visitChildren(self)
 	}
