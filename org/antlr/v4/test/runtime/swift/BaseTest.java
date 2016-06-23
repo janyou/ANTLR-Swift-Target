@@ -643,14 +643,14 @@ public abstract class BaseTest {
 			"import Foundation\n" +
 					"setbuf(__stdoutp, nil)\n" +
 					"class TreeShapeListener: ParseTreeListener{\n" +
-					"    func visitTerminal(node: TerminalNode){ }\n" +
-					"    func visitErrorNode(node: ErrorNode){ }\n" +
-					"    func enterEveryRule(ctx: ParserRuleContext) throws { }\n" +
-					"    func exitEveryRule(ctx: ParserRuleContext) throws {\n" +
+					"    func visitTerminal(_ node: TerminalNode){ }\n" +
+					"    func visitErrorNode(_ node: ErrorNode){ }\n" +
+					"    func enterEveryRule(_ ctx: ParserRuleContext) throws { }\n" +
+					"    func exitEveryRule(_ ctx: ParserRuleContext) throws {\n" +
 					"        for i in 0..\\<ctx.getChildCount() {\n" +
 					"            let parent = ctx.getChild(i)?.getParent()\n" +
 					"            if (!(parent is RuleNode) || (parent as! RuleNode ).getRuleContext() !== ctx) {\n" +
-					"                throw ANTLRError.IllegalState(msg: \"Invalid parse tree shape detected.\")\n" +
+					"                throw ANTLRError.illegalState(msg: \"Invalid parse tree shape detected.\")\n" +
 					"            }\n" +
 					"        }\n" +
 					"    }\n" +
@@ -667,9 +667,9 @@ public abstract class BaseTest {
 					"let tree = try parser.<parserStartRuleName>()\n" +
 					"<if(profile)>print(profiler.getDecisionInfo().description)<endif>\n" +
 					"try ParseTreeWalker.DEFAULT.walk(TreeShapeListener(), tree)\n" +
-					"}catch ANTLRException.CannotInvokeStartRule {\n" +
-					"    print(\"error occur: CannotInvokeStartRule\")\n" +
-					"}catch ANTLRException.Recognition(let e )   {\n" +
+					"}catch ANTLRException.cannotInvokeStartRule {\n" +
+					"    print(\"error occur: cannotInvokeStartRule\")\n" +
+					"}catch ANTLRException.recognition(let e )   {\n" +
 					"    print(\"error occur\\(e)\")\n" +
 					"}catch {\n" +
 					"    print(\"error occur\")\n" +
@@ -707,9 +707,9 @@ public abstract class BaseTest {
 				"let tokens = CommonTokenStream(lex)\n" +
 				"do {\n" +
 				"    try tokens.fill()\n" +
-				"}catch ANTLRException.CannotInvokeStartRule {\n" +
-				"    print(\"error occur: CannotInvokeStartRule\")\n" +
-				"}catch ANTLRException.Recognition(let e )   {\n" +
+				"}catch ANTLRException.cannotInvokeStartRule {\n" +
+				"    print(\"error occur: cannotInvokeStartRule\")\n" +
+				"}catch ANTLRException.recognition(let e )   {\n" +
 				"    print(\"error occur\\(e)\")\n" +
 				"}catch {\n" +
 				"    print(\"error occur\")\n" +

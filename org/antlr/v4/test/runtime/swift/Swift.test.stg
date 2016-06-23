@@ -236,7 +236,7 @@ OptionalValue(value) ::= "<value>!"
 
 GetExpectedTokenNames() ::= "try self.getExpectedTokens().toString(self.tokenNames)"
 
-RuleInvocationStack() ::= "getRuleInvocationStack().description.stringByReplacingOccurrencesOfString(\"\\\"\", withString: \"\")"
+RuleInvocationStack() ::= "getRuleInvocationStack().description.replacingOccurrences(of: \"\\\"\", with: \"\")"
 
 LL_EXACT_AMBIG_DETECTION() ::= <<_interp.setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);>>
 
@@ -275,8 +275,8 @@ public func emit() -> Token  {
 private func handleAcceptPositionForIdentifier() -> Bool {
 	let tokenText = getText()
 	var identifierLength = 0
-	while ((identifierLength \< tokenText.length)  &&  isIdentifierChar(tokenText[tokenText.startIndex.advancedBy(identifierLength)])) {
-		identifierLength++
+	while ((identifierLength \< tokenText.length)  &&  isIdentifierChar(tokenText[tokenText.characters.index(tokenText.startIndex, offsetBy: identifierLength)])) {
+		identifierLength += 1
 	}
 
 	if (getInputStream()!.index() > _tokenStartCharIndex + identifierLength) {
@@ -288,7 +288,7 @@ private func handleAcceptPositionForIdentifier() -> Bool {
 	return false
 }
 
-private func handleAcceptPositionForKeyword(keyword:String) -> Bool  {
+private func handleAcceptPositionForKeyword(_ keyword:String) -> Bool  {
 	if  getInputStream()!.index() > _tokenStartCharIndex + keyword.length   {
 		let offset = keyword.length  - 1
 		(getInterpreter() as! PositionAdjustingLexerATNSimulator).resetAcceptPosition(getInputStream()!, _tokenStartCharIndex + offset, _tokenStartLine, _tokenStartCharPositionInLine + offset)
@@ -303,7 +303,7 @@ private func handleAcceptPositionForKeyword(keyword:String) -> Bool  {
 //	return super.getInterpreter() as! PositionAdjustingLexerATNSimulator
 //}
 
-private  func isIdentifierChar(c: Character) -> Bool  {
+private  func isIdentifierChar(_ c: Character) -> Bool  {
 	return (c >= "0" && c \<= "9") || (c >= "a" && c \<= "z") || c >= "A" && c \<= "Z" || c == "_"
 }
 
@@ -316,7 +316,7 @@ class PositionAdjustingLexerATNSimulator: LexerATNSimulator {
 		super.init(recog, atn, decisionToDFA, sharedContextCache)
 	}
 
-   func resetAcceptPosition(input: CharStream,_ index: Int,_ line: Int,_ charPositionInLine: Int) {
+   func resetAcceptPosition(_ input: CharStream,_ index: Int,_ line: Int,_ charPositionInLine: Int) {
 		try! input.seek(index)
 		self.line = line
 		self.charPositionInLine = charPositionInLine
@@ -330,7 +330,7 @@ class PositionAdjustingLexerATNSimulator: LexerATNSimulator {
 BasicListener(X) ::= <<
 public class LeafListener: TBaseListener {
     override
-	public func visitTerminal(node: TerminalNode) {
+	public func visitTerminal(_ node: TerminalNode) {
 		print(node.getSymbol()?.getText() ?? "")
 	}
 }
@@ -344,7 +344,7 @@ try! walker.walk(LeafListener(), <s>)
 TokenGetterListener(X) ::= <<
 public class LeafListener: TBaseListener {
     override
-	public func exitA(ctx: TParser.AContext) {
+	public func exitA(_ ctx: TParser.AContext) {
 		if (ctx.getChildCount() == 2) {
 			print("\(ctx.INT(0)?.getSymbol()?.getText() ?? "") \(ctx.INT(1)?.getSymbol()?.getText() ?? "") \(ctx.INT())")
 		}
@@ -359,7 +359,7 @@ public class LeafListener: TBaseListener {
 RuleGetterListener(X) ::= <<
 public class LeafListener: TBaseListener {
     override
-	public func exitA(ctx: TParser.AContext) {
+	public func exitA(_ ctx: TParser.AContext) {
 		if (ctx.getChildCount() == 2) {
 			print("\(ctx.b(0)?.start?.getText() ?? "") \(ctx.b(1)?.start?.getText() ?? "") \(ctx.b()[0].start?.getText() ?? "")")
 		} else {
@@ -373,7 +373,7 @@ public class LeafListener: TBaseListener {
 LRListener(X) ::= <<
 public class LeafListener: TBaseListener {
     override
-	public func exitE(ctx: TParser.EContext) {
+	public func exitE(_ ctx: TParser.EContext) {
 		if (ctx.getChildCount() == 3) {
 		    print("\(ctx.e(0)?.start?.getText() ?? "") \(ctx.e(1)?.start?.getText() ?? "") \(ctx.e()[0].start?.getText() ?? "")")
 		} else {
@@ -388,11 +388,11 @@ public class LeafListener: TBaseListener {
 LRWithLabelsListener(X) ::= <<
 public class LeafListener: TBaseListener {
     override
-	public func exitCall(ctx: TParser.CallContext) {
+	public func exitCall(_ ctx: TParser.CallContext) {
 		print("\(ctx.e()?.start?.getText() ?? "") \(ctx.eList()!)")
 	}
 	override
-	public func exitInt(ctx: TParser.IntContext) {
+	public func exitInt(_ ctx: TParser.IntContext) {
 		print(ctx.INT()?.getSymbol()?.getText() ?? "")
 	}
 }
@@ -413,7 +413,7 @@ Declare_foo() ::= <<
 Invoke_foo() ::= "foo()"
 
 Declare_pred() ::= <<
-func pred(v: Bool) -> Bool {
+func pred(_ v: Bool) -> Bool {
 	print("eval=\(v)")
 	return v
 }

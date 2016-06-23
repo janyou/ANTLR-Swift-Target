@@ -214,7 +214,7 @@ public class TestParseTrees extends BaseTest {
 	public void testTokenAndRuleContextString() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(218);
+		StringBuilder grammarBuilder = new StringBuilder(200);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("s\n");
 		grammarBuilder.append("@init {\n");
@@ -225,7 +225,7 @@ public class TestParseTrees extends BaseTest {
 		grammarBuilder.append("}\n");
 		grammarBuilder.append("  : r=a ;\n");
 		grammarBuilder.append("a : 'x' { \n");
-		grammarBuilder.append("print(getRuleInvocationStack().description.stringByReplacingOccurrencesOfString(\"\\\"\", withString: \"\"))\n");
+		grammarBuilder.append("print(getRuleInvocationStack().description.replacingOccurrences(of: \"\\\"\", with: \"\"))\n");
 		grammarBuilder.append("} ;");
 		String grammar = grammarBuilder.toString();
 

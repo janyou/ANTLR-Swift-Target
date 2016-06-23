@@ -4682,7 +4682,7 @@ public class TestLexerExec extends BaseTest {
 	public void testPositionAdjustingLexer() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(2712);
+		StringBuilder grammarBuilder = new StringBuilder(2748);
 		grammarBuilder.append("lexer grammar PositionAdjustingLexer;\n");
 		grammarBuilder.append("\n");
 		grammarBuilder.append("@members {\n");
@@ -4711,8 +4711,8 @@ public class TestLexerExec extends BaseTest {
 		grammarBuilder.append("private func handleAcceptPositionForIdentifier() -> Bool {\n");
 		grammarBuilder.append("	let tokenText = getText()\n");
 		grammarBuilder.append("	var identifierLength = 0\n");
-		grammarBuilder.append("	while ((identifierLength < tokenText.length)  &&  isIdentifierChar(tokenText[tokenText.startIndex.advancedBy(identifierLength)])) {\n");
-		grammarBuilder.append("		identifierLength++\n");
+		grammarBuilder.append("	while ((identifierLength < tokenText.length)  &&  isIdentifierChar(tokenText[tokenText.characters.index(tokenText.startIndex, offsetBy: identifierLength)])) {\n");
+		grammarBuilder.append("		identifierLength += 1\n");
 		grammarBuilder.append("	}\n");
 		grammarBuilder.append("\n");
 		grammarBuilder.append("	if (getInputStream()!.index() > _tokenStartCharIndex + identifierLength) {\n");
@@ -4724,7 +4724,7 @@ public class TestLexerExec extends BaseTest {
 		grammarBuilder.append("	return false\n");
 		grammarBuilder.append("}\n");
 		grammarBuilder.append("\n");
-		grammarBuilder.append("private func handleAcceptPositionForKeyword(keyword:String) -> Bool  {\n");
+		grammarBuilder.append("private func handleAcceptPositionForKeyword(_ keyword:String) -> Bool  {\n");
 		grammarBuilder.append("	if  getInputStream()!.index() > _tokenStartCharIndex + keyword.length   {\n");
 		grammarBuilder.append("		let offset = keyword.length  - 1\n");
 		grammarBuilder.append("		(getInterpreter() as! PositionAdjustingLexerATNSimulator).resetAcceptPosition(getInputStream()!, _tokenStartCharIndex + offset, _tokenStartLine, _tokenStartCharPositionInLine + offset)\n");
@@ -4739,7 +4739,7 @@ public class TestLexerExec extends BaseTest {
 		grammarBuilder.append("//	return super.getInterpreter() as! PositionAdjustingLexerATNSimulator\n");
 		grammarBuilder.append("//}\n");
 		grammarBuilder.append("\n");
-		grammarBuilder.append("private  func isIdentifierChar(c: Character) -> Bool  {\n");
+		grammarBuilder.append("private  func isIdentifierChar(_ c: Character) -> Bool  {\n");
 		grammarBuilder.append("	return (c >= \"0\" && c <= \"9\") || (c >= \"a\" && c <= \"z\") || c >= \"A\" && c <= \"Z\" || c == \"_\"\n");
 		grammarBuilder.append("}\n");
 		grammarBuilder.append("\n");
@@ -4752,7 +4752,7 @@ public class TestLexerExec extends BaseTest {
 		grammarBuilder.append("		super.init(recog, atn, decisionToDFA, sharedContextCache)\n");
 		grammarBuilder.append("	}\n");
 		grammarBuilder.append("\n");
-		grammarBuilder.append("   func resetAcceptPosition(input: CharStream,_ index: Int,_ line: Int,_ charPositionInLine: Int) {\n");
+		grammarBuilder.append("   func resetAcceptPosition(_ input: CharStream,_ index: Int,_ line: Int,_ charPositionInLine: Int) {\n");
 		grammarBuilder.append("		try! input.seek(index)\n");
 		grammarBuilder.append("		self.line = line\n");
 		grammarBuilder.append("		self.charPositionInLine = charPositionInLine\n");

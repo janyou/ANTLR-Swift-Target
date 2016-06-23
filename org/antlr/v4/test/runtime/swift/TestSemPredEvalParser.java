@@ -106,10 +106,10 @@ public class TestSemPredEvalParser extends BaseTest {
 	public void testActionsHidePredsInGlobalFOLLOW() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(267);
+		StringBuilder grammarBuilder = new StringBuilder(269);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@members {\n");
-		grammarBuilder.append("func pred(v: Bool) -> Bool {\n");
+		grammarBuilder.append("func pred(_ v: Bool) -> Bool {\n");
 		grammarBuilder.append("	print(\"eval=\\(v)\")\n");
 		grammarBuilder.append("	return v\n");
 		grammarBuilder.append("}\n");
@@ -158,10 +158,10 @@ public class TestSemPredEvalParser extends BaseTest {
 	public void testDepedentPredsInGlobalFOLLOW() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(290);
+		StringBuilder grammarBuilder = new StringBuilder(292);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@members {\n");
-		grammarBuilder.append("func pred(v: Bool) -> Bool {\n");
+		grammarBuilder.append("func pred(_ v: Bool) -> Bool {\n");
 		grammarBuilder.append("	print(\"eval=\\(v)\")\n");
 		grammarBuilder.append("	return v\n");
 		grammarBuilder.append("}\n");
@@ -481,10 +481,10 @@ public class TestSemPredEvalParser extends BaseTest {
 	public void testPredsInGlobalFOLLOW() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(261);
+		StringBuilder grammarBuilder = new StringBuilder(263);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@members {\n");
-		grammarBuilder.append("func pred(v: Bool) -> Bool {\n");
+		grammarBuilder.append("func pred(_ v: Bool) -> Bool {\n");
 		grammarBuilder.append("	print(\"eval=\\(v)\")\n");
 		grammarBuilder.append("	return v\n");
 		grammarBuilder.append("}\n");

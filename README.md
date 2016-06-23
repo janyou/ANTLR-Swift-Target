@@ -1,10 +1,10 @@
 
 # ANTLR v4.5.1 Swift Target
-Upgrage to support Xcode 7.3
+Upgrage to support Xcode 8 beta
 
 #### Usage
 Download: antlr4-4.5.1.jar (ANTLR-Swift-Target/pre-release/antlr4-4.5.1.jar)  
-
+(antlr4-4.5.1-xCode7.3.1.jar for Xcode 7.3.1)
 (antlr4-4.5.1-xCode7.2.1.jar for Xcode 7.2.1)
 
 Example: generate lexer/parser/visitor from Hello.g file

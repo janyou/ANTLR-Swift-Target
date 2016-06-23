@@ -12,7 +12,7 @@ public class TestListeners extends BaseTest {
 	public void testBasic() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(436);
+		StringBuilder grammarBuilder = new StringBuilder(438);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@parser::header {\n");
 		grammarBuilder.append("}\n");
@@ -20,7 +20,7 @@ public class TestListeners extends BaseTest {
 		grammarBuilder.append("@parser::members {\n");
 		grammarBuilder.append("public class LeafListener: TBaseListener {\n");
 		grammarBuilder.append("    override\n");
-		grammarBuilder.append("	public func visitTerminal(node: TerminalNode) {\n");
+		grammarBuilder.append("	public func visitTerminal(_ node: TerminalNode) {\n");
 		grammarBuilder.append("		print(node.getSymbol()?.getText() ?? \"\")\n");
 		grammarBuilder.append("	}\n");
 		grammarBuilder.append("}\n");
@@ -59,7 +59,7 @@ public class TestListeners extends BaseTest {
 	public void testLR() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(630);
+		StringBuilder grammarBuilder = new StringBuilder(632);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@parser::header {\n");
 		grammarBuilder.append("}\n");
@@ -67,7 +67,7 @@ public class TestListeners extends BaseTest {
 		grammarBuilder.append("@parser::members {\n");
 		grammarBuilder.append("public class LeafListener: TBaseListener {\n");
 		grammarBuilder.append("    override\n");
-		grammarBuilder.append("	public func exitE(ctx: TParser.EContext) {\n");
+		grammarBuilder.append("	public func exitE(_ ctx: TParser.EContext) {\n");
 		grammarBuilder.append("		if (ctx.getChildCount() == 3) {\n");
 		grammarBuilder.append("		    print(\"\\(ctx.e(0)?.start?.getText() ?? \"\") \\(ctx.e(1)?.start?.getText() ?? \"\") \\(ctx.e()[0].start?.getText() ?? \"\")\")\n");
 		grammarBuilder.append("		} else {\n");
@@ -116,7 +116,7 @@ public class TestListeners extends BaseTest {
 	public void testLRWithLabels() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(621);
+		StringBuilder grammarBuilder = new StringBuilder(625);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@parser::header {\n");
 		grammarBuilder.append("}\n");
@@ -124,11 +124,11 @@ public class TestListeners extends BaseTest {
 		grammarBuilder.append("@parser::members {\n");
 		grammarBuilder.append("public class LeafListener: TBaseListener {\n");
 		grammarBuilder.append("    override\n");
-		grammarBuilder.append("	public func exitCall(ctx: TParser.CallContext) {\n");
+		grammarBuilder.append("	public func exitCall(_ ctx: TParser.CallContext) {\n");
 		grammarBuilder.append("		print(\"\\(ctx.e()?.start?.getText() ?? \"\") \\(ctx.eList()!)\")\n");
 		grammarBuilder.append("	}\n");
 		grammarBuilder.append("	override\n");
-		grammarBuilder.append("	public func exitInt(ctx: TParser.IntContext) {\n");
+		grammarBuilder.append("	public func exitInt(_ ctx: TParser.IntContext) {\n");
 		grammarBuilder.append("		print(ctx.INT()?.getSymbol()?.getText() ?? \"\")\n");
 		grammarBuilder.append("	}\n");
 		grammarBuilder.append("}\n");
@@ -170,7 +170,7 @@ public class TestListeners extends BaseTest {
 	public void testRuleGetters_1() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(643);
+		StringBuilder grammarBuilder = new StringBuilder(645);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@parser::header {\n");
 		grammarBuilder.append("}\n");
@@ -178,7 +178,7 @@ public class TestListeners extends BaseTest {
 		grammarBuilder.append("@parser::members {\n");
 		grammarBuilder.append("public class LeafListener: TBaseListener {\n");
 		grammarBuilder.append("    override\n");
-		grammarBuilder.append("	public func exitA(ctx: TParser.AContext) {\n");
+		grammarBuilder.append("	public func exitA(_ ctx: TParser.AContext) {\n");
 		grammarBuilder.append("		if (ctx.getChildCount() == 2) {\n");
 		grammarBuilder.append("			print(\"\\(ctx.b(0)?.start?.getText() ?? \"\") \\(ctx.b(1)?.start?.getText() ?? \"\") \\(ctx.b()[0].start?.getText() ?? \"\")\")\n");
 		grammarBuilder.append("		} else {\n");
@@ -221,7 +221,7 @@ public class TestListeners extends BaseTest {
 	public void testRuleGetters_2() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(643);
+		StringBuilder grammarBuilder = new StringBuilder(645);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@parser::header {\n");
 		grammarBuilder.append("}\n");
@@ -229,7 +229,7 @@ public class TestListeners extends BaseTest {
 		grammarBuilder.append("@parser::members {\n");
 		grammarBuilder.append("public class LeafListener: TBaseListener {\n");
 		grammarBuilder.append("    override\n");
-		grammarBuilder.append("	public func exitA(ctx: TParser.AContext) {\n");
+		grammarBuilder.append("	public func exitA(_ ctx: TParser.AContext) {\n");
 		grammarBuilder.append("		if (ctx.getChildCount() == 2) {\n");
 		grammarBuilder.append("			print(\"\\(ctx.b(0)?.start?.getText() ?? \"\") \\(ctx.b(1)?.start?.getText() ?? \"\") \\(ctx.b()[0].start?.getText() ?? \"\")\")\n");
 		grammarBuilder.append("		} else {\n");
@@ -272,7 +272,7 @@ public class TestListeners extends BaseTest {
 	public void testTokenGetters_1() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(591);
+		StringBuilder grammarBuilder = new StringBuilder(593);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@parser::header {\n");
 		grammarBuilder.append("}\n");
@@ -280,7 +280,7 @@ public class TestListeners extends BaseTest {
 		grammarBuilder.append("@parser::members {\n");
 		grammarBuilder.append("public class LeafListener: TBaseListener {\n");
 		grammarBuilder.append("    override\n");
-		grammarBuilder.append("	public func exitA(ctx: TParser.AContext) {\n");
+		grammarBuilder.append("	public func exitA(_ ctx: TParser.AContext) {\n");
 		grammarBuilder.append("		if (ctx.getChildCount() == 2) {\n");
 		grammarBuilder.append("			print(\"\\(ctx.INT(0)?.getSymbol()?.getText() ?? \"\") \\(ctx.INT(1)?.getSymbol()?.getText() ?? \"\") \\(ctx.INT())\")\n");
 		grammarBuilder.append("		}\n");
@@ -324,7 +324,7 @@ public class TestListeners extends BaseTest {
 	public void testTokenGetters_2() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(591);
+		StringBuilder grammarBuilder = new StringBuilder(593);
 		grammarBuilder.append("grammar T;\n");
 		grammarBuilder.append("@parser::header {\n");
 		grammarBuilder.append("}\n");
@@ -332,7 +332,7 @@ public class TestListeners extends BaseTest {
 		grammarBuilder.append("@parser::members {\n");
 		grammarBuilder.append("public class LeafListener: TBaseListener {\n");
 		grammarBuilder.append("    override\n");
-		grammarBuilder.append("	public func exitA(ctx: TParser.AContext) {\n");
+		grammarBuilder.append("	public func exitA(_ ctx: TParser.AContext) {\n");
 		grammarBuilder.append("		if (ctx.getChildCount() == 2) {\n");
 		grammarBuilder.append("			print(\"\\(ctx.INT(0)?.getSymbol()?.getText() ?? \"\") \\(ctx.INT(1)?.getSymbol()?.getText() ?? \"\") \\(ctx.INT())\")\n");
 		grammarBuilder.append("		}\n");
