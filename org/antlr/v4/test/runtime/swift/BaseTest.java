@@ -94,7 +94,7 @@ public abstract class BaseTest {
 
 	public static final String EXEC_NAME = "Test";
 
-	public static String ANTLR_FRAMEWORK;
+	public static String ANTLR_FRAMEWORK_DIR;
 
 	static {
 		String baseTestDir = System.getProperty("antlr-swift-test-dir");
@@ -122,6 +122,8 @@ public abstract class BaseTest {
 
 //		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
 
+		//get Antlr4 framework
+
 		try {
 			String commandLine = "find " + swiftRuntimePath +  "/ -iname *.swift -not -name merge.swift -exec cat {} ;" ;
 			ProcessBuilder builder = new ProcessBuilder(commandLine.split(" "));
@@ -131,13 +133,33 @@ public abstract class BaseTest {
 			stdoutVacuum.start();
 			p.waitFor();
 			stdoutVacuum.join();
-			ANTLR_FRAMEWORK = stdoutVacuum.toString();
 
+			String antlrSwift = stdoutVacuum.toString();
+            //write to Antlr4
+			ANTLR_FRAMEWORK_DIR =  new File(BASE_TEST_DIR, "Antlr4").getAbsolutePath();
+			mkdir(ANTLR_FRAMEWORK_DIR);
+			writeFile(ANTLR_FRAMEWORK_DIR,"Antlr4.swift",antlrSwift);
+			//compile Antlr4  module
+			buildAntlr4Framework();
+			String argsString;
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				// shutdown logic
+				eraseAntlrFrameWorkDir();
+			}
+		});
+
+	}
+	private static boolean buildAntlr4Framework() throws Exception {
+		String argsString = "xcrun -sdk macosx swiftc -emit-library -emit-module Antlr4.swift -module-name Antlr4 -module-link-name Antlr4 -Xlinker -install_name -Xlinker " + ANTLR_FRAMEWORK_DIR + "/libAntlr4.dylib ";
+		return runProcess(argsString,ANTLR_FRAMEWORK_DIR);
 	}
 
 	public String tmpdir = null;
@@ -170,14 +192,15 @@ public abstract class BaseTest {
 		else {
 			tmpdir = new File(BASE_TEST_DIR).getAbsolutePath();
 			if (!PRESERVE_TEST_DIR && new File(tmpdir).exists()) {
-				eraseFiles();
+				eraseFiles(tmpdir);
 			}
 		}
 
 	}
-	private void copyAntlrFramework(){
-		 writeFile(tmpdir,"Antlr4.swift",ANTLR_FRAMEWORK);
-	}
+
+//	private void copyAntlrFramework(){
+//		 writeFile(tmpdir,"Antlr4.swift",ANTLR_FRAMEWORK);
+//	}
 
 	protected Tool newTool(String[] args) {
 		Tool tool = new Tool(args);
@@ -300,7 +323,7 @@ public abstract class BaseTest {
 		writeFile(tmpdir, "input", input);
 		writeLexerTestFile(lexerName, showDFA);
 		addSourceFiles("main.swift");
-		addSourceFiles("Antlr4.swift");
+//		addSourceFiles("Antlr4.swift");
 
 		compile();
 		String output = execTest();
@@ -411,7 +434,7 @@ public abstract class BaseTest {
 		}
 
 		addSourceFiles("main.swift");
-		addSourceFiles("Antlr4.swift");
+//		addSourceFiles("Antlr4.swift");
 		return execRecognizer();
 	}
 
@@ -431,29 +454,18 @@ public abstract class BaseTest {
 		}
 	}
 
-
-	//remove import Antlr4
-    private void removeImport()  throws Exception  {
-		for (String file : sourceFiles){
-			if (!file.equals("main.swift") && !file.equals("Antlr4.swift")){
-			   String content = new String(Utils.readFile(tmpdir+"/"+file));
-				content = content.replaceAll("import Antlr4","");
-				writeFile(tmpdir,file,content);
-			}
-		}
-	}
-
-
 	private boolean buildProject() throws Exception {
-		copyAntlrFramework(); //copy Antlr.swift
-		removeImport();//remove import Antlr4
 		String fileList =  sourceFiles.toString().replace("[", "").replace("]", "")
 				.replace(", ", " ");
 
-		String argsString = "xcrun -sdk macosx swiftc " + fileList +  " -o " + EXEC_NAME;
+		String argsString = "xcrun -sdk macosx swiftc " + fileList +  " -o " + EXEC_NAME + " -I "+ ANTLR_FRAMEWORK_DIR + " -L "+ ANTLR_FRAMEWORK_DIR +   " -module-link-name Antlr4" ;
+		return runProcess(argsString,tmpdir);
+	}
+
+	private static boolean runProcess(String argsString, String execPath) throws IOException, InterruptedException {
 		String[] args = argsString.split(" ");
 		System.err.println("Starting build "+ argsString);//Utils.join(args, " "))
-		Process process = Runtime.getRuntime().exec(args, null, new File(tmpdir));
+		Process process = Runtime.getRuntime().exec(args, null, new File(execPath));
 		StreamVacuum stdoutVacuum = new StreamVacuum(process.getInputStream());
 		StreamVacuum stderrVacuum = new StreamVacuum(process.getErrorStream());
 		stdoutVacuum.start();
@@ -470,7 +482,7 @@ public abstract class BaseTest {
 
 	public String execTest() {
 		try {
-			String exec = tmpdir + "/" + EXEC_NAME;
+			String exec = tmpdir + "/" + EXEC_NAME ;
 			String[] args =
 					new String[] { exec,"input"};//new File(tmpdir, "input").getAbsolutePath()
 			ProcessBuilder pb = new ProcessBuilder(args);
@@ -486,7 +498,7 @@ public abstract class BaseTest {
 			String output = stdoutVacuum.toString();
 			if ( stderrVacuum.toString().length()>0 ) {
 				this.stderrDuringParse = stderrVacuum.toString();
-				System.err.println("exec stderrVacuum: "+ stderrVacuum);
+				System.err.println("execTest stderrVacuum: "+ stderrVacuum);
 			}
 			return output;
 		}
@@ -627,7 +639,7 @@ public abstract class BaseTest {
 		}
 	}
 
-	protected void mkdir(String dir) {
+	protected static void mkdir(String dir) {
 		File f = new File(dir);
 		f.mkdirs();
 	}
@@ -640,7 +652,8 @@ public abstract class BaseTest {
 	{
 
 		ST outputFileST = new ST(
-			"import Foundation\n" +
+			        "import Antlr4\n" +
+					"import Foundation\n" +
 					"setbuf(__stdoutp, nil)\n" +
 					"class TreeShapeListener: ParseTreeListener{\n" +
 					"    func visitTerminal(_ node: TerminalNode){ }\n" +
@@ -699,6 +712,7 @@ public abstract class BaseTest {
 
 	protected void writeLexerTestFile(String lexerName, boolean showDFA) {
 		ST outputFileST = new ST(
+				"import Antlr4\n" +
 				"import Foundation\n" +
 				"setbuf(__stdoutp, nil)\n" +
 				"let args = Process.arguments\n" +
@@ -739,7 +753,7 @@ public abstract class BaseTest {
 		}
 
 		addSourceFiles("main.swift");
-		addSourceFiles("Antlr4.swift");
+//		addSourceFiles("Antlr4.swift");
 	}
 
 
@@ -753,23 +767,30 @@ public abstract class BaseTest {
 		}
 	}
 
-	protected void eraseFiles() {
-		if (tmpdir == null) {
-			return;
-		}
-
-		File tmpdirF = new File(tmpdir);
-		String[] files = tmpdirF.list();
-		if(files!=null) for(String file : files) {
-			new File(tmpdir+"/"+file).delete();
-		}
-	}
 
 	protected void eraseTempDir() {
 		File tmpdirF = new File(tmpdir);
 		if ( tmpdirF.exists() ) {
-			eraseFiles();
+			eraseFilesIn(tmpdir);
 			tmpdirF.delete();
+		}
+	}
+	protected static void eraseFilesIn(String dirName) {
+		if (dirName == null) {
+			return;
+		}
+
+		File dir = new File(dirName);
+		String[] files = dir.list();
+		if(files!=null) for(String file : files) {
+			new File(dirName+"/"+file).delete();
+		}
+	}
+	protected static  void eraseAntlrFrameWorkDir() {
+		File frameworkdir = new File(ANTLR_FRAMEWORK_DIR);
+		if ( frameworkdir.exists() ) {
+			eraseFilesIn(ANTLR_FRAMEWORK_DIR);
+			frameworkdir.delete();
 		}
 	}
 

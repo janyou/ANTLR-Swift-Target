@@ -405,6 +405,10 @@ RuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,namedActions,fina
 	try enterRule(_localctx, <currentRule.startState>, <parser.name>.RULE_<currentRule.name>)
 	<namedActions.init>
 	<locals; separator="\n">
+	defer {
+    		<finallyAction>
+    		try! exitRule()
+    }
 	do {
 <if(currentRule.hasLookaheadBlock)>
 		var _alt:Int
@@ -422,10 +426,7 @@ RuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,namedActions,fina
 		try _errHandler.recover(self, re)
 	}
 	<endif>
-	defer {
-		<finallyAction>
-		try! exitRule()
-	 }
+
 	return _localctx
 }
 >>
@@ -450,6 +451,10 @@ private func <currentRule.name>(_ _p<args:{a | , <a>}>: Int) throws -> <currentR
 	try enterRecursionRule(_localctx, <currentRule.startState>, <parser.name>.RULE_<currentRule.name>, _p)
 	<namedActions.init>
 	<locals; separator="\n">
+	defer {
+    		<finallyAction>
+    		try! unrollRecursionContexts(_parentctx)
+    }
 	do {
 <if(currentRule.hasLookaheadBlock)>
 		var _alt: Int
@@ -463,10 +468,7 @@ private func <currentRule.name>(_ _p<args:{a | , <a>}>: Int) throws -> <currentR
 		_errHandler.reportError(self, re)
 		try _errHandler.recover(self, re)
 	}
-	defer {
-		<finallyAction>
-		try! unrollRecursionContexts(_parentctx)
-	 }
+
 	return _localctx;
 }
 >>
@@ -636,7 +638,7 @@ bitsetBitfieldComparison(s, bits) ::= <<
    <!let test1: Int64 = (Int64(1) \<\< temp)!>
    <!var test2: Int64 = (<first(bits.ttypes):{ttype | Utils.bitLeftShift(<offsetShift(parserName(ttype), bits.shift)>)}>)!>
    <!<rest(bits.ttypes):{ttype | test2 = test2 | Utils.bitLeftShift(<offsetShift(parserName(ttype), bits.shift)>)}; separator="\n">!>
-   var testArray: [Int] = [<s.varName>, <bits.ttypes:{ttype |<parserName(ttype)>}; separator=",">]
+   let testArray: [Int] = [<s.varName>, <bits.ttypes:{ttype |<parserName(ttype)>}; separator=",">]
    <!var test2: Int64 = Utils.testBitLeftShiftArray(testArray)!>
     return  Utils.testBitLeftShiftArray(testArray, <bits.shift>)
 }()
@@ -880,7 +882,7 @@ public func accept\<T>(_ visitor: ParseTreeVisitor\<T>) -> T? {
 }
 >>
 
-AttributeDecl(d) ::= "<d.name>: <SwiftTypeMap.(d.type)><if(d.initValue)> = <d.initValue><else>!<endif>"
+AttributeDecl(d) ::= "<d.name>: <SwiftTypeMap.(d.type)><if(d.initValue)> = <d.initValue><endif>"
 
 /** If we don't know location of label def x, use this template (_localctx as! <x.ctx.name> */
 labelref(x) ::= "<if(!x.isLocal)>_localctx.castdown(<x.ctx.name>).<endif><x.name>"
