@@ -251,7 +251,7 @@ func Property() -> Bool {
 PositionAdjustingLexer() ::= <<
 
 override
-public func nextToken() throws -> Token {
+open func nextToken() throws -> Token {
 	if (!(_interp is PositionAdjustingLexerATNSimulator)) {
 		_interp = PositionAdjustingLexerATNSimulator(self, PositionAdjustingLexer._ATN, PositionAdjustingLexer._decisionToDFA, PositionAdjustingLexer._sharedContextCache)
 	}
@@ -260,7 +260,7 @@ public func nextToken() throws -> Token {
 }
 
 override
-public func emit() -> Token  {
+open func emit() -> Token  {
 	switch (_type) {
 	case PositionAdjustingLexer.TOKENS:
 		handleAcceptPositionForKeyword("tokens")
@@ -328,9 +328,9 @@ class PositionAdjustingLexerATNSimulator: LexerATNSimulator {
 >>
 
 BasicListener(X) ::= <<
-public class LeafListener: TBaseListener {
+open class LeafListener: TBaseListener {
     override
-	public func visitTerminal(_ node: TerminalNode) {
+	open func visitTerminal(_ node: TerminalNode) {
 		print(node.getSymbol()?.getText() ?? "")
 	}
 }
@@ -342,9 +342,9 @@ try! walker.walk(LeafListener(), <s>)
 >>
 
 TokenGetterListener(X) ::= <<
-public class LeafListener: TBaseListener {
+open class LeafListener: TBaseListener {
     override
-	public func exitA(_ ctx: TParser.AContext) {
+	open func exitA(_ ctx: TParser.AContext) {
 		if (ctx.getChildCount() == 2) {
 			print("\(ctx.INT(0)?.getSymbol()?.getText() ?? "") \(ctx.INT(1)?.getSymbol()?.getText() ?? "") \(ctx.INT())")
 		}
@@ -357,9 +357,9 @@ public class LeafListener: TBaseListener {
 >>
 
 RuleGetterListener(X) ::= <<
-public class LeafListener: TBaseListener {
+open class LeafListener: TBaseListener {
     override
-	public func exitA(_ ctx: TParser.AContext) {
+	open func exitA(_ ctx: TParser.AContext) {
 		if (ctx.getChildCount() == 2) {
 			print("\(ctx.b(0)?.start?.getText() ?? "") \(ctx.b(1)?.start?.getText() ?? "") \(ctx.b()[0].start?.getText() ?? "")")
 		} else {
@@ -371,9 +371,9 @@ public class LeafListener: TBaseListener {
 
 
 LRListener(X) ::= <<
-public class LeafListener: TBaseListener {
+open class LeafListener: TBaseListener {
     override
-	public func exitE(_ ctx: TParser.EContext) {
+	open func exitE(_ ctx: TParser.EContext) {
 		if (ctx.getChildCount() == 3) {
 		    print("\(ctx.e(0)?.start?.getText() ?? "") \(ctx.e(1)?.start?.getText() ?? "") \(ctx.e()[0].start?.getText() ?? "")")
 		} else {
@@ -386,13 +386,13 @@ public class LeafListener: TBaseListener {
 >>
 
 LRWithLabelsListener(X) ::= <<
-public class LeafListener: TBaseListener {
+open class LeafListener: TBaseListener {
     override
-	public func exitCall(_ ctx: TParser.CallContext) {
+	open func exitCall(_ ctx: TParser.CallContext) {
 		print("\(ctx.e()?.start?.getText() ?? "") \(ctx.eList()!)")
 	}
 	override
-	public func exitInt(_ ctx: TParser.IntContext) {
+	open func exitInt(_ ctx: TParser.IntContext) {
 		print(ctx.INT()?.getSymbol()?.getText() ?? "")
 	}
 }

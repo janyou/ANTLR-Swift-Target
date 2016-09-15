@@ -4682,12 +4682,12 @@ public class TestLexerExec extends BaseTest {
 	public void testPositionAdjustingLexer() throws Exception {
 		mkdir(tmpdir);
 
-		StringBuilder grammarBuilder = new StringBuilder(2748);
+		StringBuilder grammarBuilder = new StringBuilder(2744);
 		grammarBuilder.append("lexer grammar PositionAdjustingLexer;\n");
 		grammarBuilder.append("\n");
 		grammarBuilder.append("@members {\n");
 		grammarBuilder.append("override\n");
-		grammarBuilder.append("public func nextToken() throws -> Token {\n");
+		grammarBuilder.append("open func nextToken() throws -> Token {\n");
 		grammarBuilder.append("	if (!(_interp is PositionAdjustingLexerATNSimulator)) {\n");
 		grammarBuilder.append("		_interp = PositionAdjustingLexerATNSimulator(self, PositionAdjustingLexer._ATN, PositionAdjustingLexer._decisionToDFA, PositionAdjustingLexer._sharedContextCache)\n");
 		grammarBuilder.append("	}\n");
@@ -4696,7 +4696,7 @@ public class TestLexerExec extends BaseTest {
 		grammarBuilder.append("}\n");
 		grammarBuilder.append("\n");
 		grammarBuilder.append("override\n");
-		grammarBuilder.append("public func emit() -> Token  {\n");
+		grammarBuilder.append("open func emit() -> Token  {\n");
 		grammarBuilder.append("	switch (_type) {\n");
 		grammarBuilder.append("	case PositionAdjustingLexer.TOKENS:\n");
 		grammarBuilder.append("		handleAcceptPositionForKeyword(\"tokens\")\n");

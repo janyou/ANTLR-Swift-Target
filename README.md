@@ -1,6 +1,6 @@
 
 # ANTLR v4.5.1 Swift Target
-Upgrage to support Xcode 8 beta
+Upgrage to support Xcode 8
 
 #### Usage
 Download: antlr4-4.5.1.jar (ANTLR-Swift-Target/pre-release/antlr4-4.5.1.jar)  

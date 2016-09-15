@@ -113,7 +113,7 @@ import Antlr4
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class <file.grammarName>BaseListener: <file.grammarName>Listener {
+open class <file.grammarName>BaseListener: <file.grammarName>Listener {
     public init() { \}
 	<file.listenerNames:{lname |
 
@@ -122,38 +122,38 @@ public class <file.grammarName>BaseListener: <file.grammarName>Listener {
  *
  * \<p>The default implementation does nothing.\</p>
  */
-public func enter<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) { \}
+open func enter<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) { \}
 /**
  * {@inheritDoc\}
  *
  * \<p>The default implementation does nothing.\</p>
  */
-public func exit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) { \}}; separator="\n">
+open func exit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) { \}}; separator="\n">
 
 	/**
 	 * {@inheritDoc\}
 	 *
 	 * \<p>The default implementation does nothing.\</p>
 	 */
-	 public func enterEveryRule(_ ctx: ParserRuleContext) { }
+	open func enterEveryRule(_ ctx: ParserRuleContext) { }
 	/**
 	 * {@inheritDoc\}
 	 *
 	 * \<p>The default implementation does nothing.\</p>
 	 */
-	 public func exitEveryRule(_ ctx: ParserRuleContext) { }
+	open func exitEveryRule(_ ctx: ParserRuleContext) { }
 	/**
 	 * {@inheritDoc\}
 	 *
 	 * \<p>The default implementation does nothing.\</p>
 	 */
-	public func visitTerminal(_ node: TerminalNode) { }
+	open func visitTerminal(_ node: TerminalNode) { }
 	/**
 	 * {@inheritDoc\}
 	 *
 	 * \<p>The default implementation does nothing.\</p>
 	 */
-	public func visitErrorNode(_ node: ErrorNode) { }
+	open func visitErrorNode(_ node: ErrorNode) { }
 }
 >>
 
@@ -172,7 +172,7 @@ import Antlr4
  * @param \<T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class <file.grammarName>Visitor\<T>: ParseTreeVisitor\<T> {
+open class <file.grammarName>Visitor\<T>: ParseTreeVisitor\<T> {
 	<file.visitorNames:{lname |
 /**
 <if(file.visitorLabelRuleNames.(lname))>
@@ -185,7 +185,7 @@ public class <file.grammarName>Visitor\<T>: ParseTreeVisitor\<T> {
   - ctx: the parse tree
 - returns: the visitor result
  */
-public func visit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) -> T{
+open func visit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) -> T{
  	fatalError(#function + " must be overridden")
 \}
 }; separator="\n">
@@ -208,7 +208,7 @@ import Antlr4
  * @param \<T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class <file.grammarName>BaseVisitor\<T>: AbstractParseTreeVisitor\<T> {
+open class <file.grammarName>BaseVisitor\<T>: AbstractParseTreeVisitor\<T> {
 	<file.visitorNames:{lname |
 /**
  * {@inheritDoc\}
@@ -216,7 +216,7 @@ public class <file.grammarName>BaseVisitor\<T>: AbstractParseTreeVisitor\<T> {
  * \<p>The default implementation returns the result of calling
  * {@link #visitChildren\} on {@code ctx\}.\</p>
  */
-public func visit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) -> T? { return visitChildren(ctx) \}}; separator="\n">
+open func visit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Context) -> T? { return visitChildren(ctx) \}}; separator="\n">
 }
 >>
 
@@ -230,7 +230,7 @@ Parser(parser, funcs, atn, sempredFuncs, superClass) ::= <<
 
 Parser_(parser, funcs, atn, sempredFuncs, ctor, superClass) ::= <<
 <!//@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})!>
-public class <parser.name>: <superClass; null="Parser"> {
+open class <parser.name>: <superClass; null="Parser"> {
 
 	internal static var _decisionToDFA: [DFA] = {
           var decisionToDFA = [DFA]()
@@ -253,16 +253,16 @@ public class <parser.name>: <superClass; null="Parser"> {
 	<vocabulary(parser.literalNames, parser.symbolicNames)>
 
 	override
-	public func getGrammarFileName() -> String { return "<parser.grammarFileName; format="java-escape">" }
+	open func getGrammarFileName() -> String { return "<parser.grammarFileName; format="java-escape">" }
 
 	override
-	public func getRuleNames() -> [String] { return <parser.name>.ruleNames }
+	open func getRuleNames() -> [String] { return <parser.name>.ruleNames }
 
 	override
-	public func getSerializedATN() -> String { return <parser.name>._serializedATN }
+	open func getSerializedATN() -> String { return <parser.name>._serializedATN }
 
 	override
-	public func getATN() -> ATN { return <parser.name>._ATN }
+	open func getATN() -> ATN { return <parser.name>._ATN }
 
 	<namedActions.members>
 	<parser:(ctor)()>
@@ -270,11 +270,11 @@ public class <parser.name>: <superClass; null="Parser"> {
 
 <if(sempredFuncs)>
     override
-	public func sempred(_ _localctx: RuleContext?, _ ruleIndex: Int,  _ predIndex: Int)throws -> Bool {
+	open func sempred(_ _localctx: RuleContext?, _ ruleIndex: Int,  _ predIndex: Int)throws -> Bool {
 		switch (ruleIndex) {
 		<parser.sempredFuncs.values:{f|
 case  <f.ruleIndex>:
-	return try <f.name>_sempred(_localctx?.castdown(<f.ctxType>), predIndex)}; separator="\n">
+	return try <f.name>_sempred(_localctx?.castdown(<f.ctxType>.self), predIndex)}; separator="\n">
 	    default: return true
 		}
 		<!return true;!>
@@ -320,7 +320,7 @@ public let tokenNames: [String?]? = {
 
 override
 <!//@Deprecated!>
-public func getTokenNames() -> [String?]? {
+open func getTokenNames() -> [String?]? {
 	return tokenNames
 }
 >>
@@ -328,7 +328,7 @@ public func getTokenNames() -> [String?]? {
 dumpActions(recog, argFuncs, actionFuncs, sempredFuncs) ::= <<
 <if(actionFuncs)>
 override
-public func action(_ _localctx: RuleContext?,  _ ruleIndex: Int, _ actionIndex: Int) throws {
+open func action(_ _localctx: RuleContext?,  _ ruleIndex: Int, _ actionIndex: Int) throws {
 	switch (ruleIndex) {
 	<recog.actionFuncs.values:{f|
 case <f.ruleIndex>:
@@ -341,11 +341,11 @@ case <f.ruleIndex>:
 <endif>
 <if(sempredFuncs)>
 override
-public func sempred(_ _localctx: RuleContext?, _  ruleIndex: Int,_   predIndex: Int) throws -> Bool{
+open func sempred(_ _localctx: RuleContext?, _  ruleIndex: Int,_   predIndex: Int) throws -> Bool{
 	switch (ruleIndex) {
 	<recog.sempredFuncs.values:{f|
 case <f.ruleIndex>:
-	return try <f.name>_sempred(_localctx?.castdown(<f.ctxType>), predIndex)}; separator="\n">
+	return try <f.name>_sempred(_localctx?.castdown(<f.ctxType>.self), predIndex)}; separator="\n">
 	default: return true
 	}
 	<!return true;!>
@@ -356,11 +356,11 @@ case <f.ruleIndex>:
 
 parser_ctor(p) ::= <<
 
-public override func getVocabulary() -> Vocabulary {
+open override func getVocabulary() -> Vocabulary {
     return <p.name>.VOCABULARY
 }
 
-public override  init(_ input:TokenStream)throws {
+public override init(_ input:TokenStream)throws {
     RuntimeMetaData.checkVersion("4.5.1", RuntimeMetaData.VERSION)
 	try super.init(input)
 	_interp = ParserATNSimulator(self,<p.name>._ATN,<p.name>._decisionToDFA, <parser.name>._sharedContextCache)
@@ -400,7 +400,7 @@ RuleFunction(currentRule,args,code,locals,ruleCtx,altLabelCtxs,namedActions,fina
 <ruleCtx>
 <altLabelCtxs:{l | <altLabelCtxs.(l)>}; separator="\n">
 @discardableResult
-<if(currentRule.modifiers)><currentRule.modifiers:{f | <f> }><else>public func <endif><currentRule.name>(<if(first(args))>_ <endif><args; separator=", _">) throws -> <currentRule.ctxType> {
+<if(currentRule.modifiers)><currentRule.modifiers:{f | <f> }><else>open func <endif><currentRule.name>(<if(first(args))>_ <endif><args; separator=", _">) throws -> <currentRule.ctxType> {
 	var _localctx: <currentRule.ctxType> = <currentRule.ctxType>(_ctx, getState()<currentRule.args:{a | , <a.name>}>)
 	try enterRule(_localctx, <currentRule.startState>, <parser.name>.RULE_<currentRule.name>)
 	<namedActions.init>
@@ -783,26 +783,26 @@ RuleContextDecl(r) ::= "<r.name>: <r.ctxName>!"
 RuleContextListDecl(rdecl) ::= "<rdecl.name>:Array\<<rdecl.ctxName>> = Array\<<rdecl.ctxName>>()"
 
 ContextTokenGetterDecl(t)      ::=
-    "public func <t.name>() -> TerminalNode? { return getToken(<parser.name>.<t.name>, 0) }"
+    "open func <t.name>() -> TerminalNode? { return getToken(<parser.name>.<t.name>, 0) }"
 ContextTokenListGetterDecl(t)  ::=
-    "public func <t.name>() -> Array\<TerminalNode> { return getTokens(<parser.name>.<t.name>) }"
+    "open func <t.name>() -> Array\<TerminalNode> { return getTokens(<parser.name>.<t.name>) }"
 ContextTokenListIndexedGetterDecl(t)  ::= <<
-public func <t.name>(_ i:Int) -> TerminalNode?{
+open func <t.name>(_ i:Int) -> TerminalNode?{
 	return getToken(<parser.name>.<t.name>, i)
 }
 >>
 ContextRuleGetterDecl(r)       ::= <<
-public func <r.name>() -> <r.ctxName>? {
+open func <r.name>() -> <r.ctxName>? {
 	return getRuleContext(<r.ctxName>.self,0)
 }
 >>
 ContextRuleListGetterDecl(r)   ::= <<
-public func <r.name>() -> Array\<<r.ctxName>\> {
+open func <r.name>() -> Array\<<r.ctxName>\> {
 	return getRuleContexts(<r.ctxName>.self)
 }
 >>
 ContextRuleListIndexedGetterDecl(r)   ::= <<
-public func <r.name>(_ i: Int) -> <r.ctxName>? {
+open func <r.name>(_ i: Int) -> <r.ctxName>? {
 	return getRuleContext(<r.ctxName>.self,i)
 }
 >>
@@ -824,7 +824,7 @@ CaptureNextTokenType(d) ::= "<d.varName> = try _input.LA(1)"
 
 StructDecl(struct,ctorAttrs,attrs,getters,dispatchMethods,interfaces,extensionMembers,
            superClass={ParserRuleContext}) ::= <<
-public  class <struct.name>: <superClass><if(interfaces)>, <interfaces; separator=", "><endif> {
+open class <struct.name>: <superClass><if(interfaces)>, <interfaces; separator=", "><endif> {
 	<attrs:{a | public var <a>}; separator="\n">
 	<getters:{g | <g>}; separator="\n">
 	<! <if(ctorAttrs)>public init(_ parent: ParserRuleContext,_ invokingState: Int) { super.init(parent, invokingState)  }<endif> !>
@@ -834,7 +834,7 @@ public  class <struct.name>: <superClass><if(interfaces)>, <interfaces; separato
 		<struct.ctorAttrs:{a | self.<a.name> = <a.name>;}; separator="\n">
 	 }
 	<endif>
-	public override func getRuleIndex() -> Int { return <parser.name>.RULE_<struct.derivedFromName> }
+	open override func getRuleIndex() -> Int { return <parser.name>.RULE_<struct.derivedFromName> }
 <if(struct.provideCopyFrom)> <! don't need copy unless we have subclasses !>
 	<!public init() { }!>
 	public  func copyFrom(_ ctx: <struct.name>) {
@@ -861,7 +861,7 @@ public  final class <struct.name>: <currentRule.name; format="cap">Context {
 
 ListenerDispatchMethod(method) ::= <<
 override
-public func <if(method.isEnter)>enter<else>exit<endif>Rule(_ listener: ParseTreeListener) {
+open func <if(method.isEnter)>enter<else>exit<endif>Rule(_ listener: ParseTreeListener) {
 	if listener is <parser.grammarName>Listener {
 	 	(listener as! <parser.grammarName>Listener).<if(method.isEnter)>enter<else>exit<endif><struct.derivedFromName; format="cap">(self)
 	}
@@ -870,7 +870,7 @@ public func <if(method.isEnter)>enter<else>exit<endif>Rule(_ listener: ParseTree
 
 VisitorDispatchMethod(method) ::= <<
 override
-public func accept\<T>(_ visitor: ParseTreeVisitor\<T>) -> T? {
+open func accept\<T>(_ visitor: ParseTreeVisitor\<T>) -> T? {
 	if visitor is <parser.grammarName>Visitor {
 	     return (visitor as! <parser.grammarName>Visitor\<T>).visit<struct.derivedFromName; format="cap">(self)
 	}else if visitor is <parser.grammarName>BaseVisitor {
@@ -882,13 +882,13 @@ public func accept\<T>(_ visitor: ParseTreeVisitor\<T>) -> T? {
 }
 >>
 
-AttributeDecl(d) ::= "<d.name>: <SwiftTypeMap.(d.type)><if(d.initValue)> = <d.initValue><endif>"
+AttributeDecl(d) ::= "<d.name>: <SwiftTypeMap.(d.type)><if(d.initValue)> = <d.initValue><else>!<endif>"
 
 /** If we don't know location of label def x, use this template (_localctx as! <x.ctx.name> */
-labelref(x) ::= "<if(!x.isLocal)>_localctx.castdown(<x.ctx.name>).<endif><x.name>"
+labelref(x) ::= "<if(!x.isLocal)>_localctx.castdown(<x.ctx.name>.self).<endif><x.name>"
 
 /** For any action chunk, what is correctly-typed context struct ptr?    */
-ctx(actionChunk) ::= "_localctx.castdown(<actionChunk.ctx.name>)"
+ctx(actionChunk) ::= "_localctx.castdown(<actionChunk.ctx.name>.self)"
 
 // used for left-recursive rules
 recRuleAltPredicate(ruleName,opPrec)  ::= "precpred(_ctx, <opPrec>)"
@@ -945,7 +945,7 @@ import Antlr4
 <lexer>
 >>
 Lexer(lexer, atn, actionFuncs, sempredFuncs, superClass) ::= <<
-public class <lexer.name>: <superClass; null="Lexer"> {
+open class <lexer.name>: <superClass; null="Lexer"> {
 	internal static var _decisionToDFA: [DFA] = {
           var decisionToDFA = [DFA]()
           let length = <lexer.name>._ATN.getNumberOfDecisions()
@@ -973,7 +973,7 @@ public class <lexer.name>: <superClass; null="Lexer"> {
 	<vocabulary(lexer.literalNames, lexer.symbolicNames)>
 
 	<namedActions.members>
-    public override func getVocabulary() -> Vocabulary {
+    open override func getVocabulary() -> Vocabulary {
         return <lexer.name>.VOCABULARY
     }
 
@@ -984,19 +984,19 @@ public class <lexer.name>: <superClass; null="Lexer"> {
 	}
 
 	override
-	public func getGrammarFileName() -> String { return "<lexer.grammarFileName>" }
+	open func getGrammarFileName() -> String { return "<lexer.grammarFileName>" }
 
     override
-	public func getRuleNames() -> [String] { return <lexer.name>.ruleNames }
+	open func getRuleNames() -> [String] { return <lexer.name>.ruleNames }
 
 	override
-	public func getSerializedATN() -> String { return <lexer.name>._serializedATN }
+	open func getSerializedATN() -> String { return <lexer.name>._serializedATN }
 
 	override
-	public func getModeNames() -> [String] { return <lexer.name>.modeNames }
+	open func getModeNames() -> [String] { return <lexer.name>.modeNames }
 
 	override
-	public func getATN() -> ATN { return <lexer.name>._ATN }
+	open func getATN() -> ATN { return <lexer.name>._ATN }
 
 	<dumpActions(lexer, "", actionFuncs, sempredFuncs)>
 	<atn>
@@ -1038,7 +1038,7 @@ public static let _serializedATN: String = Utils.join(
  *	must be an object, default value is "null".
  */
 initValue(typeName) ::= <<
-<SwiftTypeInitMap.(typeName)>
+ <SwiftTypeInitMap.(typeName)>
 >>
 
 codeFileExtension() ::= ".swift"

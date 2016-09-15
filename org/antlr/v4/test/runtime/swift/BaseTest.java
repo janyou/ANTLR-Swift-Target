@@ -119,7 +119,6 @@ public abstract class BaseTest {
 			throw new RuntimeException("Swift runtime file not found at:" + swiftRuntime.getPath());
 		}
 		String swiftRuntimePath = swiftRuntime.getPath();
-
 //		String swiftRuntimePath = "/Users/janyou/OSXWorks/AntlrSwift/Antlr4/Antlr4";
 
 		//get Antlr4 framework
@@ -670,7 +669,7 @@ public abstract class BaseTest {
 					"}\n" +
 					"\n" +
 					"do {\n" +
-					"let args = Process.arguments\n" +
+					"let args = CommandLine.arguments\n" +
 					"let input = ANTLRFileStream(args[1])\n" +
 					"let lex = <lexerName>(input)\n" +
 					"let tokens = CommonTokenStream(lex)\n" +
@@ -715,7 +714,7 @@ public abstract class BaseTest {
 				"import Antlr4\n" +
 				"import Foundation\n" +
 				"setbuf(__stdoutp, nil)\n" +
-				"let args = Process.arguments\n" +
+				"let args = CommandLine.arguments\n" +
 				"let input = ANTLRFileStream(args[1])\n" +
 				"let lex = <lexerName>(input)\n" +
 				"let tokens = CommonTokenStream(lex)\n" +
