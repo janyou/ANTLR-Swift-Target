@@ -10,11 +10,11 @@
 brew install maven
 ```
 
-3.ANTLR 4.5.1 distribution (zip)[downloads](https://github.com/antlr/antlr4/archive/4.5.1.zip)
+3.ANTLR 4.5.3 distribution (zip)[downloads](https://github.com/antlr/antlr4/archive/4.5.3.zip)
 
 ##Build
 
-1.uncompress ANTLR 4.5.1 distribution (zip)
+1.uncompress ANTLR 4.5.3 distribution (zip)
 
 2.copy
 
@@ -83,8 +83,8 @@ mvn compile
 mvn install
 ```
 
-You should see antlr4-4.5.1.jar:
+You should see antlr4-4.5.4-SNAPSHOT.jar:
 
 ```
-[uncompress folder]/tool/target/antlr4-4.5.1.jar
+[uncompress folder]/tool/target/antlr4-4.5.4-SNAPSHOT.jar
 ```

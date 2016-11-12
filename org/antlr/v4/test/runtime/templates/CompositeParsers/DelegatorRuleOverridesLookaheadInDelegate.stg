@@ -35,4 +35,5 @@ type_ : 'int' ;
 decl : type_ ID ';'
 	| type_ ID initIt ';' {<write("\"JavaDecl: \" + $text")>};
 initIt : '=' INT;
+
 >>

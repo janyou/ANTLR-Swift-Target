@@ -333,7 +333,7 @@ public class TestCompositeParsers extends BaseTest {
 			"type_ : 'int' ;\n" +
 			"decl : type_ ID ';'\n" +
 			"	| type_ ID initIt ';' {print(\"JavaDecl: \" + $text, terminator: \"\")};\n" +
-			"initIt : '=' INT;";
+			"initIt : '=' INT;\n";
 		writeFile(tmpdir, "S.g4", slave_S);
 
 		StringBuilder grammarBuilder = new StringBuilder(121);
