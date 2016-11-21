@@ -1,6 +1,9 @@
 
 # ANTLR v4.5.3 Swift Target
 
+
+*This project has been merged into [antlr](https://github.com/antlr/antlr4), no longer updated.*
+
 Upgrage to support Xcode 8
 
 #### Usage
