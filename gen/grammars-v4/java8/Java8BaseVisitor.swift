@@ -79,35 +79,7 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitClassType_lf_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lf_classOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitClassType_lfno_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lfno_classOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitInterfaceType_lf_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lf_classOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitInterfaceType_lfno_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lfno_classOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
+	open func visitClassType_classOrInterfaceType(_ ctx: Java8Parser.ClassType_classOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -142,21 +114,14 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitTypeParameterModifier(_ ctx: Java8Parser.TypeParameterModifierContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitTypeBound(_ ctx: Java8Parser.TypeBoundContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitAdditionalBound(_ ctx: Java8Parser.AdditionalBoundContext) -> T? { return visitChildren(ctx) }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	open func visitInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -170,28 +135,7 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitTypeArgumentList(_ ctx: Java8Parser.TypeArgumentListContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitTypeArgument(_ ctx: Java8Parser.TypeArgumentContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitWildcard(_ ctx: Java8Parser.WildcardContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitWildcardBounds(_ ctx: Java8Parser.WildcardBoundsContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -226,20 +170,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitMethodName(_ ctx: Java8Parser.MethodNameContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitAmbiguousName(_ ctx: Java8Parser.AmbiguousNameContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitCompilationUnit(_ ctx: Java8Parser.CompilationUnitContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
@@ -254,42 +184,7 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitPackageModifier(_ ctx: Java8Parser.PackageModifierContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitImportDeclaration(_ ctx: Java8Parser.ImportDeclarationContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitSingleTypeImportDeclaration(_ ctx: Java8Parser.SingleTypeImportDeclarationContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitTypeImportOnDemandDeclaration(_ ctx: Java8Parser.TypeImportOnDemandDeclarationContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitSingleStaticImportDeclaration(_ ctx: Java8Parser.SingleStaticImportDeclarationContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitStaticImportOnDemandDeclaration(_ ctx: Java8Parser.StaticImportOnDemandDeclarationContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -325,13 +220,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	open func visitTypeParameters(_ ctx: Java8Parser.TypeParametersContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitTypeParameterList(_ ctx: Java8Parser.TypeParameterListContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -457,13 +345,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitUnannClassType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lfno_unannClassOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
@@ -471,21 +352,7 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitUnannInterfaceType(_ ctx: Java8Parser.UnannInterfaceTypeContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitUnannInterfaceType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lf_unannClassOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitUnannInterfaceType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lfno_unannClassOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
+	open func visitUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -584,13 +451,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	open func visitThrows_(_ ctx: Java8Parser.Throws_Context) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitExceptionTypeList(_ ctx: Java8Parser.ExceptionTypeListContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -863,13 +723,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitElementValueList(_ ctx: Java8Parser.ElementValueListContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitMarkerAnnotation(_ ctx: Java8Parser.MarkerAnnotationContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
@@ -885,13 +738,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	open func visitArrayInitializer(_ ctx: Java8Parser.ArrayInitializerContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitVariableInitializerList(_ ctx: Java8Parser.VariableInitializerListContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1046,13 +892,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	open func visitSwitchLabel(_ ctx: Java8Parser.SwitchLabelContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitEnumConstantName(_ ctx: Java8Parser.EnumConstantNameContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1262,13 +1101,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitPrimaryNoNewArray_lf_arrayAccess(_ ctx: Java8Parser.PrimaryNoNewArray_lf_arrayAccessContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitPrimaryNoNewArray_lfno_arrayAccess(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_arrayAccessContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
@@ -1283,13 +1115,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitPrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primaryContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
@@ -1298,13 +1123,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	open func visitPrimaryNoNewArray_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primaryContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitPrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primaryContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1458,13 +1276,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitConstantExpression(_ ctx: Java8Parser.ConstantExpressionContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	open func visitExpression(_ ctx: Java8Parser.ExpressionContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
@@ -1494,13 +1305,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	open func visitLambdaBody(_ ctx: Java8Parser.LambdaBodyContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitAssignmentExpression(_ ctx: Java8Parser.AssignmentExpressionContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1612,14 +1416,14 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitPreIncrementExpression(_ ctx: Java8Parser.PreIncrementExpressionContext) -> T? { return visitChildren(ctx) }
+	open func visitPreIncDecExpression(_ ctx: Java8Parser.PreIncDecExpressionContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	open func visitPreDecrementExpression(_ ctx: Java8Parser.PreDecrementExpressionContext) -> T? { return visitChildren(ctx) }
+	open func visitPostIncDecExpression(_ ctx: Java8Parser.PostIncDecExpressionContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1634,34 +1438,6 @@ open class Java8BaseVisitor<T>: AbstractParseTreeVisitor<T> {
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	open func visitPostfixExpression(_ ctx: Java8Parser.PostfixExpressionContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitPostIncrementExpression(_ ctx: Java8Parser.PostIncrementExpressionContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitPostIncrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostIncrementExpression_lf_postfixExpressionContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitPostDecrementExpression(_ ctx: Java8Parser.PostDecrementExpressionContext) -> T? { return visitChildren(ctx) }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	open func visitPostDecrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostDecrementExpression_lf_postfixExpressionContext) -> T? { return visitChildren(ctx) }
 	/**
 	 * {@inheritDoc}
 	 *

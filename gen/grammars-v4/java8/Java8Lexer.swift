@@ -151,31 +151,6 @@ open class Java8Lexer: Lexer {
 	override
 	open func getATN() -> ATN { return Java8Lexer._ATN }
 
-	override
-	open func sempred(_ _localctx: RuleContext?, _  ruleIndex: Int,_   predIndex: Int) throws -> Bool{
-		switch (ruleIndex) {
-		case 146:
-			return try JavaLetter_sempred(_localctx?.castdown(RuleContext.self), predIndex)
-		case 147:
-			return try JavaLetterOrDigit_sempred(_localctx?.castdown(RuleContext.self), predIndex)
-		default: return true
-		}
-	}
-	private func JavaLetter_sempred(_ _localctx: RuleContext!,  _ predIndex: Int) throws -> Bool {
-		switch (predIndex) {
-		    case 0:return Character.isJavaIdentifierStart(_input.LA(-1))
-		    case 1:return Character.isJavaIdentifierStart(Character.toCodePoint((char)_input.LA(-2), (char)_input.LA(-1)))
-		    default: return true
-		}
-	}
-	private func JavaLetterOrDigit_sempred(_ _localctx: RuleContext!,  _ predIndex: Int) throws -> Bool {
-		switch (predIndex) {
-		    case 2:return Character.isJavaIdentifierPart(_input.LA(-1))
-		    case 3:return Character.isJavaIdentifierPart(Character.toCodePoint((char)_input.LA(-2), (char)_input.LA(-1)))
-		    default: return true
-		}
-	}
-
     public static let _serializedATN: String = Java8LexerATN().jsonString
 	public static let _ATN: ATN = ATNDeserializer().deserializeFromJson(_serializedATN)
 

@@ -132,65 +132,13 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterClassType_lf_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lf_classOrInterfaceTypeContext) { }
+	open func enterClassType_classOrInterfaceType(_ ctx: Java8Parser.ClassType_classOrInterfaceTypeContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitClassType_lf_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lf_classOrInterfaceTypeContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterClassType_lfno_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lfno_classOrInterfaceTypeContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitClassType_lfno_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lfno_classOrInterfaceTypeContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterInterfaceType_lf_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lf_classOrInterfaceTypeContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitInterfaceType_lf_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lf_classOrInterfaceTypeContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterInterfaceType_lfno_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lfno_classOrInterfaceTypeContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitInterfaceType_lfno_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lfno_classOrInterfaceTypeContext) { }
+	open func exitClassType_classOrInterfaceType(_ ctx: Java8Parser.ClassType_classOrInterfaceTypeContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -249,32 +197,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterTypeParameterModifier(_ ctx: Java8Parser.TypeParameterModifierContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitTypeParameterModifier(_ ctx: Java8Parser.TypeParameterModifierContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterTypeBound(_ ctx: Java8Parser.TypeBoundContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitTypeBound(_ ctx: Java8Parser.TypeBoundContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterAdditionalBound(_ ctx: Java8Parser.AdditionalBoundContext) { }
 	/**
 	 * {@inheritDoc}
@@ -282,6 +204,19 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitAdditionalBound(_ ctx: Java8Parser.AdditionalBoundContext) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func enterInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	open func exitInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -301,19 +236,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterTypeArgumentList(_ ctx: Java8Parser.TypeArgumentListContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitTypeArgumentList(_ ctx: Java8Parser.TypeArgumentListContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterTypeArgument(_ ctx: Java8Parser.TypeArgumentContext) { }
 	/**
 	 * {@inheritDoc}
@@ -321,32 +243,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitTypeArgument(_ ctx: Java8Parser.TypeArgumentContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterWildcard(_ ctx: Java8Parser.WildcardContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitWildcard(_ ctx: Java8Parser.WildcardContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterWildcardBounds(_ ctx: Java8Parser.WildcardBoundsContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitWildcardBounds(_ ctx: Java8Parser.WildcardBoundsContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -405,32 +301,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterMethodName(_ ctx: Java8Parser.MethodNameContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitMethodName(_ ctx: Java8Parser.MethodNameContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterAmbiguousName(_ ctx: Java8Parser.AmbiguousNameContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitAmbiguousName(_ ctx: Java8Parser.AmbiguousNameContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterCompilationUnit(_ ctx: Java8Parser.CompilationUnitContext) { }
 	/**
 	 * {@inheritDoc}
@@ -457,19 +327,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterPackageModifier(_ ctx: Java8Parser.PackageModifierContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPackageModifier(_ ctx: Java8Parser.PackageModifierContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterImportDeclaration(_ ctx: Java8Parser.ImportDeclarationContext) { }
 	/**
 	 * {@inheritDoc}
@@ -477,58 +334,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitImportDeclaration(_ ctx: Java8Parser.ImportDeclarationContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterSingleTypeImportDeclaration(_ ctx: Java8Parser.SingleTypeImportDeclarationContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitSingleTypeImportDeclaration(_ ctx: Java8Parser.SingleTypeImportDeclarationContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterTypeImportOnDemandDeclaration(_ ctx: Java8Parser.TypeImportOnDemandDeclarationContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitTypeImportOnDemandDeclaration(_ ctx: Java8Parser.TypeImportOnDemandDeclarationContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterSingleStaticImportDeclaration(_ ctx: Java8Parser.SingleStaticImportDeclarationContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitSingleStaticImportDeclaration(_ ctx: Java8Parser.SingleStaticImportDeclarationContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterStaticImportOnDemandDeclaration(_ ctx: Java8Parser.StaticImportOnDemandDeclarationContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitStaticImportOnDemandDeclaration(_ ctx: Java8Parser.StaticImportOnDemandDeclarationContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -594,19 +399,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitTypeParameters(_ ctx: Java8Parser.TypeParametersContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterTypeParameterList(_ ctx: Java8Parser.TypeParameterListContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitTypeParameterList(_ ctx: Java8Parser.TypeParameterListContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -834,19 +626,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterUnannClassType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lfno_unannClassOrInterfaceTypeContext) { }
 	/**
 	 * {@inheritDoc}
@@ -860,39 +639,13 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterUnannInterfaceType(_ ctx: Java8Parser.UnannInterfaceTypeContext) { }
+	open func enterUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitUnannInterfaceType(_ ctx: Java8Parser.UnannInterfaceTypeContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterUnannInterfaceType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lf_unannClassOrInterfaceTypeContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitUnannInterfaceType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lf_unannClassOrInterfaceTypeContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterUnannInterfaceType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lfno_unannClassOrInterfaceTypeContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitUnannInterfaceType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lfno_unannClassOrInterfaceTypeContext) { }
+	open func exitUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1075,19 +828,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitThrows_(_ ctx: Java8Parser.Throws_Context) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterExceptionTypeList(_ ctx: Java8Parser.ExceptionTypeListContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitExceptionTypeList(_ ctx: Java8Parser.ExceptionTypeListContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1588,19 +1328,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterElementValueList(_ ctx: Java8Parser.ElementValueListContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitElementValueList(_ ctx: Java8Parser.ElementValueListContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterMarkerAnnotation(_ ctx: Java8Parser.MarkerAnnotationContext) { }
 	/**
 	 * {@inheritDoc}
@@ -1634,19 +1361,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitArrayInitializer(_ ctx: Java8Parser.ArrayInitializerContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterVariableInitializerList(_ ctx: Java8Parser.VariableInitializerListContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitVariableInitializerList(_ ctx: Java8Parser.VariableInitializerListContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1933,19 +1647,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitSwitchLabel(_ ctx: Java8Parser.SwitchLabelContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterEnumConstantName(_ ctx: Java8Parser.EnumConstantNameContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitEnumConstantName(_ ctx: Java8Parser.EnumConstantNameContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -2329,19 +2030,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterPrimaryNoNewArray_lf_arrayAccess(_ ctx: Java8Parser.PrimaryNoNewArray_lf_arrayAccessContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPrimaryNoNewArray_lf_arrayAccess(_ ctx: Java8Parser.PrimaryNoNewArray_lf_arrayAccessContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterPrimaryNoNewArray_lfno_arrayAccess(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_arrayAccessContext) { }
 	/**
 	 * {@inheritDoc}
@@ -2368,19 +2056,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterPrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primaryContext) { }
 	/**
 	 * {@inheritDoc}
@@ -2401,19 +2076,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitPrimaryNoNewArray_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primaryContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterPrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primaryContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primaryContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -2693,19 +2355,6 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterConstantExpression(_ ctx: Java8Parser.ConstantExpressionContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitConstantExpression(_ ctx: Java8Parser.ConstantExpressionContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	open func enterExpression(_ ctx: Java8Parser.ExpressionContext) { }
 	/**
 	 * {@inheritDoc}
@@ -2765,19 +2414,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitLambdaBody(_ ctx: Java8Parser.LambdaBodyContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterAssignmentExpression(_ ctx: Java8Parser.AssignmentExpressionContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitAssignmentExpression(_ ctx: Java8Parser.AssignmentExpressionContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -2979,26 +2615,26 @@ open class Java8BaseListener: Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterPreIncrementExpression(_ ctx: Java8Parser.PreIncrementExpressionContext) { }
+	open func enterPreIncDecExpression(_ ctx: Java8Parser.PreIncDecExpressionContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitPreIncrementExpression(_ ctx: Java8Parser.PreIncrementExpressionContext) { }
+	open func exitPreIncDecExpression(_ ctx: Java8Parser.PreIncDecExpressionContext) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func enterPreDecrementExpression(_ ctx: Java8Parser.PreDecrementExpressionContext) { }
+	open func enterPostIncDecExpression(_ ctx: Java8Parser.PostIncDecExpressionContext) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	open func exitPreDecrementExpression(_ ctx: Java8Parser.PreDecrementExpressionContext) { }
+	open func exitPostIncDecExpression(_ ctx: Java8Parser.PostIncDecExpressionContext) { }
 
 	/**
 	 * {@inheritDoc}
@@ -3025,58 +2661,6 @@ open class Java8BaseListener: Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	open func exitPostfixExpression(_ ctx: Java8Parser.PostfixExpressionContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterPostIncrementExpression(_ ctx: Java8Parser.PostIncrementExpressionContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPostIncrementExpression(_ ctx: Java8Parser.PostIncrementExpressionContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterPostIncrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostIncrementExpression_lf_postfixExpressionContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPostIncrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostIncrementExpression_lf_postfixExpressionContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterPostDecrementExpression(_ ctx: Java8Parser.PostDecrementExpressionContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPostDecrementExpression(_ ctx: Java8Parser.PostDecrementExpressionContext) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func enterPostDecrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostDecrementExpression_lf_postfixExpressionContext) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	open func exitPostDecrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostDecrementExpression_lf_postfixExpressionContext) { }
 
 	/**
 	 * {@inheritDoc}

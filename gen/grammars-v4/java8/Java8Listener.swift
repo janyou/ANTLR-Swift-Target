@@ -115,65 +115,17 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitClassType(_ ctx: Java8Parser.ClassTypeContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#classType_lf_classOrInterfaceType}.
+	 * Enter a parse tree produced by {@link Java8Parser#classType_classOrInterfaceType}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterClassType_lf_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lf_classOrInterfaceTypeContext)
+	func enterClassType_classOrInterfaceType(_ ctx: Java8Parser.ClassType_classOrInterfaceTypeContext)
 	/**
-	 * Exit a parse tree produced by {@link Java8Parser#classType_lf_classOrInterfaceType}.
+	 * Exit a parse tree produced by {@link Java8Parser#classType_classOrInterfaceType}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitClassType_lf_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lf_classOrInterfaceTypeContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#classType_lfno_classOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterClassType_lfno_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lfno_classOrInterfaceTypeContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#classType_lfno_classOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitClassType_lfno_classOrInterfaceType(_ ctx: Java8Parser.ClassType_lfno_classOrInterfaceTypeContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#interfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#interfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#interfaceType_lf_classOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterInterfaceType_lf_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lf_classOrInterfaceTypeContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#interfaceType_lf_classOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitInterfaceType_lf_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lf_classOrInterfaceTypeContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#interfaceType_lfno_classOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterInterfaceType_lfno_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lfno_classOrInterfaceTypeContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#interfaceType_lfno_classOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitInterfaceType_lfno_classOrInterfaceType(_ ctx: Java8Parser.InterfaceType_lfno_classOrInterfaceTypeContext)
+	func exitClassType_classOrInterfaceType(_ ctx: Java8Parser.ClassType_classOrInterfaceTypeContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#typeVariable}.
 	 - Parameters:
@@ -223,30 +175,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitTypeParameter(_ ctx: Java8Parser.TypeParameterContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#typeParameterModifier}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterTypeParameterModifier(_ ctx: Java8Parser.TypeParameterModifierContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#typeParameterModifier}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitTypeParameterModifier(_ ctx: Java8Parser.TypeParameterModifierContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#typeBound}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterTypeBound(_ ctx: Java8Parser.TypeBoundContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#typeBound}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitTypeBound(_ ctx: Java8Parser.TypeBoundContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#additionalBound}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -258,6 +186,18 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitAdditionalBound(_ ctx: Java8Parser.AdditionalBoundContext)
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#interfaceType}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func enterInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext)
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#interfaceType}.
+	 - Parameters:
+	   - ctx: the parse tree
+	 */
+	func exitInterfaceType(_ ctx: Java8Parser.InterfaceTypeContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#typeArguments}.
 	 - Parameters:
@@ -271,18 +211,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitTypeArguments(_ ctx: Java8Parser.TypeArgumentsContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#typeArgumentList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterTypeArgumentList(_ ctx: Java8Parser.TypeArgumentListContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#typeArgumentList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitTypeArgumentList(_ ctx: Java8Parser.TypeArgumentListContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#typeArgument}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -294,30 +222,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitTypeArgument(_ ctx: Java8Parser.TypeArgumentContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#wildcard}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterWildcard(_ ctx: Java8Parser.WildcardContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#wildcard}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitWildcard(_ ctx: Java8Parser.WildcardContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#wildcardBounds}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterWildcardBounds(_ ctx: Java8Parser.WildcardBoundsContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#wildcardBounds}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitWildcardBounds(_ ctx: Java8Parser.WildcardBoundsContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#packageName}.
 	 - Parameters:
@@ -367,30 +271,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitExpressionName(_ ctx: Java8Parser.ExpressionNameContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#methodName}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterMethodName(_ ctx: Java8Parser.MethodNameContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#methodName}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitMethodName(_ ctx: Java8Parser.MethodNameContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#ambiguousName}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterAmbiguousName(_ ctx: Java8Parser.AmbiguousNameContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#ambiguousName}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitAmbiguousName(_ ctx: Java8Parser.AmbiguousNameContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#compilationUnit}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -415,18 +295,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitPackageDeclaration(_ ctx: Java8Parser.PackageDeclarationContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#packageModifier}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPackageModifier(_ ctx: Java8Parser.PackageModifierContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#packageModifier}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPackageModifier(_ ctx: Java8Parser.PackageModifierContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#importDeclaration}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -438,54 +306,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitImportDeclaration(_ ctx: Java8Parser.ImportDeclarationContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#singleTypeImportDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterSingleTypeImportDeclaration(_ ctx: Java8Parser.SingleTypeImportDeclarationContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#singleTypeImportDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitSingleTypeImportDeclaration(_ ctx: Java8Parser.SingleTypeImportDeclarationContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#typeImportOnDemandDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterTypeImportOnDemandDeclaration(_ ctx: Java8Parser.TypeImportOnDemandDeclarationContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#typeImportOnDemandDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitTypeImportOnDemandDeclaration(_ ctx: Java8Parser.TypeImportOnDemandDeclarationContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#singleStaticImportDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterSingleStaticImportDeclaration(_ ctx: Java8Parser.SingleStaticImportDeclarationContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#singleStaticImportDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitSingleStaticImportDeclaration(_ ctx: Java8Parser.SingleStaticImportDeclarationContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#staticImportOnDemandDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterStaticImportOnDemandDeclaration(_ ctx: Java8Parser.StaticImportOnDemandDeclarationContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#staticImportOnDemandDeclaration}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitStaticImportOnDemandDeclaration(_ ctx: Java8Parser.StaticImportOnDemandDeclarationContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#typeDeclaration}.
 	 - Parameters:
@@ -546,18 +366,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitTypeParameters(_ ctx: Java8Parser.TypeParametersContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#typeParameterList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterTypeParameterList(_ ctx: Java8Parser.TypeParameterListContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#typeParameterList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitTypeParameterList(_ ctx: Java8Parser.TypeParameterListContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#superclass}.
 	 - Parameters:
@@ -763,18 +571,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitUnannClassType(_ ctx: Java8Parser.UnannClassTypeContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#unannClassType_lf_unannClassOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#unannClassType_lf_unannClassOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#unannClassType_lfno_unannClassOrInterfaceType}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -787,41 +583,17 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitUnannClassType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lfno_unannClassOrInterfaceTypeContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#unannInterfaceType}.
+	 * Enter a parse tree produced by {@link Java8Parser#unannClassType_lf_unannClassOrInterfaceType}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterUnannInterfaceType(_ ctx: Java8Parser.UnannInterfaceTypeContext)
+	func enterUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext)
 	/**
-	 * Exit a parse tree produced by {@link Java8Parser#unannInterfaceType}.
+	 * Exit a parse tree produced by {@link Java8Parser#unannClassType_lf_unannClassOrInterfaceType}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitUnannInterfaceType(_ ctx: Java8Parser.UnannInterfaceTypeContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#unannInterfaceType_lf_unannClassOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterUnannInterfaceType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lf_unannClassOrInterfaceTypeContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#unannInterfaceType_lf_unannClassOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitUnannInterfaceType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lf_unannClassOrInterfaceTypeContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#unannInterfaceType_lfno_unannClassOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterUnannInterfaceType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lfno_unannClassOrInterfaceTypeContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#unannInterfaceType_lfno_unannClassOrInterfaceType}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitUnannInterfaceType_lfno_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannInterfaceType_lfno_unannClassOrInterfaceTypeContext)
+	func exitUnannClassType_lf_unannClassOrInterfaceType(_ ctx: Java8Parser.UnannClassType_lf_unannClassOrInterfaceTypeContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#unannTypeVariable}.
 	 - Parameters:
@@ -990,18 +762,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitThrows_(_ ctx: Java8Parser.Throws_Context)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#exceptionTypeList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterExceptionTypeList(_ ctx: Java8Parser.ExceptionTypeListContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#exceptionTypeList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitExceptionTypeList(_ ctx: Java8Parser.ExceptionTypeListContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#exceptionType}.
 	 - Parameters:
@@ -1459,18 +1219,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitElementValueArrayInitializer(_ ctx: Java8Parser.ElementValueArrayInitializerContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#elementValueList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterElementValueList(_ ctx: Java8Parser.ElementValueListContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#elementValueList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitElementValueList(_ ctx: Java8Parser.ElementValueListContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#markerAnnotation}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -1506,18 +1254,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitArrayInitializer(_ ctx: Java8Parser.ArrayInitializerContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#variableInitializerList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterVariableInitializerList(_ ctx: Java8Parser.VariableInitializerListContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#variableInitializerList}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitVariableInitializerList(_ ctx: Java8Parser.VariableInitializerListContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#block}.
 	 - Parameters:
@@ -1782,18 +1518,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitSwitchLabel(_ ctx: Java8Parser.SwitchLabelContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#enumConstantName}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterEnumConstantName(_ ctx: Java8Parser.EnumConstantNameContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#enumConstantName}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitEnumConstantName(_ ctx: Java8Parser.EnumConstantNameContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#whileStatement}.
 	 - Parameters:
@@ -2143,18 +1867,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitPrimaryNoNewArray(_ ctx: Java8Parser.PrimaryNoNewArrayContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#primaryNoNewArray_lf_arrayAccess}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPrimaryNoNewArray_lf_arrayAccess(_ ctx: Java8Parser.PrimaryNoNewArray_lf_arrayAccessContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#primaryNoNewArray_lf_arrayAccess}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPrimaryNoNewArray_lf_arrayAccess(_ ctx: Java8Parser.PrimaryNoNewArray_lf_arrayAccessContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#primaryNoNewArray_lfno_arrayAccess}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -2179,18 +1891,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitPrimaryNoNewArray_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primaryContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -2214,18 +1914,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitPrimaryNoNewArray_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primaryContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primaryContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary(_ ctx: Java8Parser.PrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primaryContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary}.
 	 - Parameters:
@@ -2479,18 +2167,6 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitDimExpr(_ ctx: Java8Parser.DimExprContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#constantExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterConstantExpression(_ ctx: Java8Parser.ConstantExpressionContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#constantExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitConstantExpression(_ ctx: Java8Parser.ConstantExpressionContext)
-	/**
 	 * Enter a parse tree produced by {@link Java8Parser#expression}.
 	 - Parameters:
 	   - ctx: the parse tree
@@ -2550,18 +2226,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitLambdaBody(_ ctx: Java8Parser.LambdaBodyContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#assignmentExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterAssignmentExpression(_ ctx: Java8Parser.AssignmentExpressionContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#assignmentExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitAssignmentExpression(_ ctx: Java8Parser.AssignmentExpressionContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#assignment}.
 	 - Parameters:
@@ -2743,29 +2407,29 @@ public protocol Java8Listener: ParseTreeListener {
 	 */
 	func exitUnaryExpression(_ ctx: Java8Parser.UnaryExpressionContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#preIncrementExpression}.
+	 * Enter a parse tree produced by {@link Java8Parser#preIncDecExpression}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterPreIncrementExpression(_ ctx: Java8Parser.PreIncrementExpressionContext)
+	func enterPreIncDecExpression(_ ctx: Java8Parser.PreIncDecExpressionContext)
 	/**
-	 * Exit a parse tree produced by {@link Java8Parser#preIncrementExpression}.
+	 * Exit a parse tree produced by {@link Java8Parser#preIncDecExpression}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitPreIncrementExpression(_ ctx: Java8Parser.PreIncrementExpressionContext)
+	func exitPreIncDecExpression(_ ctx: Java8Parser.PreIncDecExpressionContext)
 	/**
-	 * Enter a parse tree produced by {@link Java8Parser#preDecrementExpression}.
+	 * Enter a parse tree produced by {@link Java8Parser#postIncDecExpression}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func enterPreDecrementExpression(_ ctx: Java8Parser.PreDecrementExpressionContext)
+	func enterPostIncDecExpression(_ ctx: Java8Parser.PostIncDecExpressionContext)
 	/**
-	 * Exit a parse tree produced by {@link Java8Parser#preDecrementExpression}.
+	 * Exit a parse tree produced by {@link Java8Parser#postIncDecExpression}.
 	 - Parameters:
 	   - ctx: the parse tree
 	 */
-	func exitPreDecrementExpression(_ ctx: Java8Parser.PreDecrementExpressionContext)
+	func exitPostIncDecExpression(_ ctx: Java8Parser.PostIncDecExpressionContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#unaryExpressionNotPlusMinus}.
 	 - Parameters:
@@ -2790,54 +2454,6 @@ public protocol Java8Listener: ParseTreeListener {
 	   - ctx: the parse tree
 	 */
 	func exitPostfixExpression(_ ctx: Java8Parser.PostfixExpressionContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#postIncrementExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPostIncrementExpression(_ ctx: Java8Parser.PostIncrementExpressionContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#postIncrementExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPostIncrementExpression(_ ctx: Java8Parser.PostIncrementExpressionContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#postIncrementExpression_lf_postfixExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPostIncrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostIncrementExpression_lf_postfixExpressionContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#postIncrementExpression_lf_postfixExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPostIncrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostIncrementExpression_lf_postfixExpressionContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#postDecrementExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPostDecrementExpression(_ ctx: Java8Parser.PostDecrementExpressionContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#postDecrementExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPostDecrementExpression(_ ctx: Java8Parser.PostDecrementExpressionContext)
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#postDecrementExpression_lf_postfixExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func enterPostDecrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostDecrementExpression_lf_postfixExpressionContext)
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#postDecrementExpression_lf_postfixExpression}.
-	 - Parameters:
-	   - ctx: the parse tree
-	 */
-	func exitPostDecrementExpression_lf_postfixExpression(_ ctx: Java8Parser.PostDecrementExpression_lf_postfixExpressionContext)
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#castExpression}.
 	 - Parameters:
