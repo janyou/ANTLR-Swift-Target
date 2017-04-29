@@ -10,13 +10,13 @@
 brew install maven
 ```
 
-3.ANTLR 4.5.1 distribution (zip)[downloads](https://github.com/antlr/antlr4/archive/4.5.1.zip)
+3.ANTLR 4.5.3 distribution (zip)[downloads](https://github.com/antlr/antlr4/archive/4.5.3.zip)
 
 4.XCode 7 and Command Line Tools
 
 ##Build
 
-####1.uncompress ANTLR 4.5.1 distribution (zip)
+####1.uncompress ANTLR 4.5.3 distribution (zip)
 
 ####2.copy
 

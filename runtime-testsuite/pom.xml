@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.antlr</groupId>
     <artifactId>antlr4-master</artifactId>
-    <version>4.5.1</version>
+    <version>4.5.4-SNAPSHOT</version>
   </parent>
   <artifactId>antlr4-runtime-testsuite</artifactId>
   <name>ANTLR 4 Runtime Test Generator</name>
@@ -63,7 +63,7 @@
         <directory>../runtime</directory>
       </resource>
     </resources>
-    <plugins> 
+    <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -73,12 +73,12 @@
             <include>**/csharp/Test*.java</include>
             <include>**/java/Test*.java</include>
             <include>**/javascript/node/Test*.java</include>
-            <include>**/python2/Test*.java</include> 
+            <include>**/python2/Test*.java</include>
             <include>**/python3/Test*.java</include>
             <include>**/swift/Test*.java</include>
           </includes>
         </configuration>
-      </plugin>    
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -90,10 +90,10 @@
             </goals>
           </execution>
         </executions>
-      </plugin>      
+      </plugin>
     </plugins>
   </build>
-  
+
   <profiles>
     <profile>
       <id>gen</id>
@@ -113,7 +113,7 @@
                   <mainClass>org.antlr.v4.testgen.TestGenerator</mainClass>
                   <arguments>
                     <argument>-root</argument>
-                    <argument>${basedir}/resources</argument>
+                    <argument>${basedir}</argument>
                     <argument>-outdir</argument>
                     <argument>${basedir}/test</argument>
                     <argument>-templates</argument>
@@ -122,7 +122,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>        
+          </plugin>
         </plugins>
       </build>
     </profile>
@@ -138,9 +138,9 @@
                 <include>**/Test*.java</include>
               </includes>
             </configuration>
-          </plugin>            
+          </plugin>
         </plugins>
       </build>
-    </profile>      
-  </profiles>  
+    </profile>
+  </profiles>
 </project>

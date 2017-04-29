@@ -48,7 +48,7 @@ SwiftTypeMap ::= [
 ]
 // args must be <object-model-object>, <fields-resulting-in-STs>
 
-ParserFile(file, parser, namedActions) ::= <<
+ParserFile(file, parser, namedActions,contextSuperClass) ::= <<
 <fileHeader(file.grammarFileName, file.ANTLRVersion)>
 <if(file.genPackage)>
 <!package <file.genPackage>;!>
@@ -59,7 +59,7 @@ import Antlr4
 <parser>
 >>
 
-ListenerFile(file, header) ::= <<
+ListenerFile(file, header, namedActions) ::= <<
 <fileHeader(file.grammarFileName, file.ANTLRVersion)>
 <if(file.genPackage)>
 <!package <file.genPackage>;!>
@@ -98,7 +98,7 @@ func exit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap">Con
 }
 >>
 
-BaseListenerFile(file, header) ::= <<
+BaseListenerFile(file, header, namedActions) ::= <<
 <fileHeader(file.grammarFileName, file.ANTLRVersion)>
 <if(file.genPackage)>
 <!package <file.genPackage>;!>
@@ -157,7 +157,7 @@ open func exit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="cap
 }
 >>
 
-VisitorFile(file, header) ::= <<
+VisitorFile(file, header, namedActions) ::= <<
 <fileHeader(file.grammarFileName, file.ANTLRVersion)>
 <if(file.genPackage)>
 <!package <file.genPackage>;!>
@@ -192,7 +192,7 @@ open func visit<lname; format="cap">(_ ctx: <file.parserName>.<lname; format="ca
 }
 >>
 
-BaseVisitorFile(file, header) ::= <<
+BaseVisitorFile(file, header, namedActions) ::= <<
 <fileHeader(file.grammarFileName, file.ANTLRVersion)>
 <if(file.genPackage)>
 <!package <file.genPackage>;!>
@@ -361,7 +361,7 @@ open override func getVocabulary() -> Vocabulary {
 }
 
 public override init(_ input:TokenStream)throws {
-    RuntimeMetaData.checkVersion("4.5.1", RuntimeMetaData.VERSION)
+    RuntimeMetaData.checkVersion("4.5.3", RuntimeMetaData.VERSION)
 	try super.init(input)
 	_interp = ParserATNSimulator(self,<p.name>._ATN,<p.name>._decisionToDFA, <parser.name>._sharedContextCache)
 }
@@ -489,7 +489,7 @@ CodeBlockForAlt(currentAltCodeBlock, locals, preamble, ops) ::= <<
 
 LL1AltBlock(choice, preamble, alts, error) ::= <<
 setState(<choice.stateNumber>)
-<!try _errHandler.sync(self);!>
+try _errHandler.sync(self)
 <if(choice.label)><labelref(choice.label)> = try _input.LT(1)<endif>
 <preamble; separator="\n">
 switch (try _input.LA(1)) {
@@ -503,7 +503,7 @@ default:
 
 LL1OptionalBlock(choice, alts, error) ::= <<
 setState(<choice.stateNumber>)
-<!try _errHandler.sync(self);!>
+try _errHandler.sync(self)
 switch (try _input.LA(1)) {
 <choice.altLook,alts:{look,alt| <cases(ttypes=look)>
  	<alt>
@@ -515,7 +515,7 @@ default:
 
 LL1OptionalBlockSingleAlt(choice, expr, alts, preamble, error, followExpr) ::= <<
 setState(<choice.stateNumber>)
-<!try _errHandler.sync(self);!>
+try _errHandler.sync(self)
 <preamble; separator="\n">
 if (<expr>) {
 	<alts; separator="\n">
@@ -551,7 +551,7 @@ repeat {
 
 AltBlock(choice, preamble, alts, error) ::= <<
 setState(<choice.stateNumber>)
-<!try _errHandler.sync(self);!>
+try _errHandler.sync(self)
 <if(choice.label)><labelref(choice.label)> = try _input.LT(1)<endif>
 <preamble; separator="\n">
 switch(try getInterpreter().adaptivePredict(_input,<choice.decision>, _ctx)) {
@@ -565,7 +565,7 @@ default: break
 
 OptionalBlock(choice, alts, error) ::= <<
 setState(<choice.stateNumber>)
-<!try _errHandler.sync(self);!>
+try _errHandler.sync(self)
 switch (try getInterpreter().adaptivePredict(_input,<choice.decision>,_ctx)) {
 <alts:{alt |
 case <i><if(!choice.ast.greedy)>+1<endif>:
@@ -702,7 +702,7 @@ if (<if(invert)><m.varName> \<= 0 || <else>!<endif>(<expr>)) {
 
 Wildcard(w) ::= <<
 setState(<w.stateNumber>)
-<if(w.labels)><w.labels:{l | <labelref(l)> = }><endif>matchWildcard();
+<if(w.labels)><w.labels:{l | <labelref(l)> = }><endif>try matchWildcard();
 >>
 
 // ACTION STUFF
@@ -824,7 +824,7 @@ CaptureNextTokenType(d) ::= "<d.varName> = try _input.LA(1)"
 
 StructDecl(struct,ctorAttrs,attrs,getters,dispatchMethods,interfaces,extensionMembers,
            superClass={ParserRuleContext}) ::= <<
-open class <struct.name>: <superClass><if(interfaces)>, <interfaces; separator=", "><endif> {
+open class <struct.name>:<if(contextSuperClass)><contextSuperClass><else>ParserRuleContext<endif><if(interfaces)>, <interfaces; separator=", "><endif> {
 	<attrs:{a | public var <a>}; separator="\n">
 	<getters:{g | <g>}; separator="\n">
 	<! <if(ctorAttrs)>public init(_ parent: ParserRuleContext,_ invokingState: Int) { super.init(parent, invokingState)  }<endif> !>
