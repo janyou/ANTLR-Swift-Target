@@ -1,0 +1,10 @@
+T__0=1
+T__1=2
+T__2=3
+HEADER=4
+COMMENTLINE=5
+EOL=6
+TEXT=7
+'\t'=1
+';'=2
+'='=3

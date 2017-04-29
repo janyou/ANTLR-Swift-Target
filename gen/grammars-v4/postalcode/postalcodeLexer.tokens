@@ -1,0 +1,3 @@
+DIGIT=1
+LETTER=2
+WS=3
